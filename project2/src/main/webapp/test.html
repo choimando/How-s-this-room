@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	body h1{
+		font-family: 여기어때 잘난체 otf;
+     	 color: #F6323E;
+	}
+</style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$.ajax({
+			url : "Test",
+			data : {house_no : 1},
+			success : function(data){
+				$.each(data, function(){
+					var house_no = this.house_no;
+					var opt_aircon = this.opt_aircon;
+					var opt_builtin = this.opt_builtin;
+					var opt_elevator = this.opt_elevator;
+					var opt_gas = this.opt_gas;
+					var opt_park = this.opt_park;
+					var opt_refrige = this.opt_refrige;
+					var opt_washer = this.opt_washer;
+					var opt_opt_micro = this.opt_micro;
+					
+					
+					$("body").append($("<div></div>").html(this.house_no));
+					if(opt_aircon == "Y"){
+						opt_aircon = $("<img>").attr("src", "https://thumbnail9.coupangcdn.com/thumbnails/remote/230x230ex/image/retail/images/2022/04/05/11/4/ff563217-fe15-4e15-87d2-88ce5ca9b313.jpg")
+						$("body").append(opt_aircon)
+					}
+					if(opt_builtin == "Y"){
+						$("body").append($("<div></div>").html(this.opt_builtin));
+					}
+					if(opt_elevator == "Y"){
+						$("body").append($("<div></div>").html(this.opt_elevator));
+					}
+					if(opt_gas == "Y"){
+						$("body").append($("<div></div>").html(this.opt_gas));
+					}
+					if(opt_park == "Y"){
+						$("body").append($("<div></div>").html(this.opt_park));
+					}
+					if(opt_refrige == "Y"){
+						$("body").append($("<div></div>").html(this.opt_refrige));
+					}
+					if(opt_washer == "Y"){
+						$("body").append($("<div></div>").html(this.opt_washer));
+					}
+					if(opt_micro == "Y"){
+						$("body").append($("<div></div>").html(this.opt_micro));
+					}
+					
+					
+				})
+				
+				
+			}
+		});
+	});
+</script>
+</head>
+<body>
+	<h1>이방어때</h1>
+	
+</body>
+</html>
