@@ -26,7 +26,7 @@ public class OptDAO {
 	private OptDAO() {		
 	}	
 	
-	public ArrayList<OptVO> findByHouseNo(int house_no){
+	public ArrayList<OptVO> findByNo(int house_no){
 		ArrayList<OptVO> list = new ArrayList<OptVO>();
 		String sql = "select house_no, opt_park, opt_aircon, opt_refrige, opt_washer, opt_gas, opt_micro, opt_elevator, opt_builtin from opt where house_no = "+house_no;
 		Connection conn = null;
@@ -48,7 +48,7 @@ public class OptDAO {
 				o.setOpt_park(rs.getString("opt_park"));
 				o.setOpt_refrige(rs.getString("opt_refrige"));
 				o.setOpt_washer(rs.getString("opt_washer"));
-				o.setOt_micro(rs.getString("opt_micro"));
+				o.setOpt_micro(rs.getString("opt_micro"));
 				list.add(o);
 			}
 			

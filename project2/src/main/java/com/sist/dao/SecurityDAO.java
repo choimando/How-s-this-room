@@ -14,16 +14,20 @@ import com.sist.vo.MgrVO;
 import com.sist.vo.SecurityVO;
 
 public class SecurityDAO {
-	public static SecurityDAO dao;
+	private static SecurityDAO dao;
 	
-	private SecurityDAO getInstance(){
+	private SecurityDAO() {
+		
+	}
+	
+	public static SecurityDAO getInstance(){
 		if(dao == null) {
 			dao = new SecurityDAO();
 		}
 		return dao;
 	}
 	
-	private ArrayList<SecurityVO> findByHouseNo(int house_no){
+	public ArrayList<SecurityVO> findByNo(int house_no){
 		ArrayList<SecurityVO> list = new ArrayList<SecurityVO>();
 		String sql = "select * from security where house_no = "+house_no;
 		Connection conn = null;

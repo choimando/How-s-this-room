@@ -10,7 +10,7 @@ public class OptVO {
 	private String opt_refrige;
 	private String opt_washer;
 	private String opt_gas;
-	private String ot_micro;
+	private String opt_micro;
 	private String opt_elevator;
 	private String opt_builtin;
 }

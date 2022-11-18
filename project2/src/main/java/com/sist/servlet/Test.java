@@ -35,7 +35,7 @@ public class Test extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int house_no = Integer.parseInt(request.getParameter("house_no"));
 		OptDAO dao = OptDAO.getInstance();
-		ArrayList<OptVO> list = dao.findByHouseNo(house_no);
+		ArrayList<OptVO> list = dao.findByNo(house_no);
 		Gson gson = new Gson();
 		response.setContentType("application/json; charset=utf-8");
 		String str = gson.toJson(list);

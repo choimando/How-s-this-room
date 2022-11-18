@@ -14,16 +14,20 @@ import com.sist.vo.ImgVO;
 import com.sist.vo.OptVO;
 
 public class ImgDAO {
-	public static ImgDAO dao;
+	private static ImgDAO dao;
 	
-	private ImgDAO getInstance() {
+	private ImgDAO() {
+		
+	}
+	
+	public static ImgDAO getInstance() {
 		if(dao == null) {
 			dao = new ImgDAO();
 		}
 		return dao;
 	}
 	
-	private ArrayList<ImgVO> findByHouseNo(int house_no){
+	public ArrayList<ImgVO> findByNo(int house_no){
 		ArrayList<ImgVO> list = new ArrayList<ImgVO>();
 		String sql = "select * from img where house_no ="+house_no;
 		Connection conn = null;

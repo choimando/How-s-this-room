@@ -11,7 +11,8 @@ public class InsertHouseAction implements ProjectAction {
 	@Override
 	public String pro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+
 		return "insertHouse.jsp";
 	}
-
+	
 }

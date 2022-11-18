@@ -13,16 +13,20 @@ import javax.sql.DataSource;
 import com.sist.vo.MgrVO;
 
 public class MgrDAO {
-	public static MgrDAO dao;
+	private static MgrDAO dao;
 	
-	private MgrDAO getInstance() {
+	public static MgrDAO getInstance() {
 		if(dao == null) {
 			dao = new MgrDAO();
 		}
 		return dao;
 	}
 	
-	private ArrayList<MgrVO> findByHouseNo(int house_no){
+	private MgrDAO() {
+		
+	}
+	
+	public ArrayList<MgrVO> findByNo(int house_no){
 		ArrayList<MgrVO> list = new ArrayList<MgrVO>();
 		String sql = "select * from mgr where house_no = " + house_no;
 		Connection conn = null;

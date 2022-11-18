@@ -1,7 +1,7 @@
 package com.sist.dao;
 
 public class MemberDAO {
-	public static MemberDAO dao;
+	private static MemberDAO dao;
 	private MemberDAO() {
 		
 	}
@@ -11,4 +11,6 @@ public class MemberDAO {
 		}
 		return dao;
 	}
+	
+
 }

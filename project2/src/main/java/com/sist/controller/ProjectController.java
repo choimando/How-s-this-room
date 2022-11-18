@@ -20,7 +20,7 @@ import com.sist.action.ProjectAction;
 /**
  * Servlet implementation class SistController
  */
-//@WebServlet("*.do")
+@WebServlet("*.do")
 public class ProjectController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	HashMap<String, ProjectAction> map;
@@ -42,7 +42,7 @@ public class ProjectController extends HttpServlet {
 		
 		String path = config.getServletContext().getRealPath("WEB-INF");
 		try {
-			FileReader fr = new FileReader(path + "/project.properties");
+			FileReader fr = new FileReader(path + "/sist.properties");
 			Properties prop = new Properties();
 			prop.load(fr);
 			Iterator iter = prop.keySet().iterator();
