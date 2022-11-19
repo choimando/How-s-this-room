@@ -9,4 +9,5 @@ public class HouseDAO {
 		}
 		return dao;
 	}
+	//생성자없음
 }

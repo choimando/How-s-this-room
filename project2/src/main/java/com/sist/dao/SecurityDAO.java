@@ -16,7 +16,7 @@ import com.sist.vo.SecurityVO;
 public class SecurityDAO {
 	public static SecurityDAO dao;
 	
-	private SecurityDAO getInstance(){
+	public SecurityDAO getInstance(){
 		if(dao == null) {
 			dao = new SecurityDAO();
 		}

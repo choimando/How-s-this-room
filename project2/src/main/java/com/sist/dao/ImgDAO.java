@@ -16,7 +16,7 @@ import com.sist.vo.OptVO;
 public class ImgDAO {
 	public static ImgDAO dao;
 	
-	private ImgDAO getInstance() {
+	public ImgDAO getInstance() {
 		if(dao == null) {
 			dao = new ImgDAO();
 		}

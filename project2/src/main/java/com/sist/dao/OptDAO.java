@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import com.sist.vo.OptVO;
 
 public class OptDAO {
-	private static OptDAO dao;
+	public static OptDAO dao;
 	public static OptDAO getInstance() {
 		if(dao == null) {
 			dao = new OptDAO();

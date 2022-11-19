@@ -15,7 +15,7 @@ import com.sist.vo.MgrVO;
 public class MgrDAO {
 	public static MgrDAO dao;
 	
-	private MgrDAO getInstance() {
+	public MgrDAO getInstance() {
 		if(dao == null) {
 			dao = new MgrDAO();
 		}
