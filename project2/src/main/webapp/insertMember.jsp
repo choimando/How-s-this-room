@@ -72,10 +72,11 @@
     }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<!-- 주소등록 시 주소 찾기=>카카오 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 $(function(){
-	
+	//비밀번호 일치 불일치
 	$('.pw').focusout(function(){
 		var pwd = $("#pwd").val();
 		var pwdOK = $("#pwdOK").val();
@@ -96,7 +97,7 @@ $(function(){
 	
 	});
 	
-	
+	//아이디 중복확인
 	$("#btnid").on("click",function(){
 		$.ajax({
 			url:"Id/Check",
@@ -120,7 +121,7 @@ $(function(){
 	
 	
 	
-	
+		// 주소 가져오기
 		$("#address_kakao").on("click",function(){
 			new daum.Postcode({
 				oncomplete: function(data){
