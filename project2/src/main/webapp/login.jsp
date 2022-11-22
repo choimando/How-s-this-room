@@ -63,7 +63,27 @@
 		margin-bottom: 30px;
 	
 	}
+	.message{
+		 margin: 15px 0 0;
+  	     color: #b3b3b3;
+  		 font-size: 12px;
+	}
+	body{
+    	width: 1536px;
+    }
 </style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	/*$("#btnLogin").click(function(){
+		var data = $("#id").val();
+		sessionStorage.setItem("data",id); // 아이디를 담은 키
+		
+		var key = sessionStorage.getItem()
+	});*/
+});
+</script>
+
 </head>
 <body>
 	<header class="nav">
@@ -78,11 +98,12 @@
 	</header>
 	<section>
 		<div class="loginbox">
-		<form>
+		<form action="loginOK.do" method="post">
 			<div id="login">LOGIN</div>
-			<input type="text" name="id" class="text-field" placeholder="아이디">	
-			<input type="password" name="pwd" class="text-field" placeholder="비밀번호">
-			<input type="submit" value="로그인" class="loginbtn">	
+			<input type="text" name="id" id="id" class="text-field" placeholder="아이디" required="required">	
+			<input type="password" name="pwd" id="pwd" class="text-field" placeholder="비밀번호" required="required">
+			<input type="submit" value="로그인" id="btnLogin" class="loginbtn">	<br>
+			<p class="message">회원이 아니신가요?<a href="insertMember.do">회원가입</a></p>
 		</form>	
 		</div>
 	</section>	
