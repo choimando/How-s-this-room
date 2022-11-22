@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sist.dao.HouseDAO;
 import com.sist.vo.HouseVO;
+import com.sist.vo.RecommendVO;
 
 public class LoadHouseAction implements ProjectAction {
 
 	@Override
 	public String pro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HouseDAO dao = HouseDAO.getInstance();
-		String searchCol = null;
-		ArrayList<HouseVO> list = dao.findAll(searchCol);
+		ArrayList<RecommendVO> list = dao.findByHit();
 		request.setAttribute("list", list);
 		
 		return "houseList.jsp";

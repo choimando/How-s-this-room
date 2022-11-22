@@ -26,6 +26,37 @@ public class HouseDAO {
 		}
 		return dao;
 	}
+	// 위도, 경도 불러오기 메소드
+	public ArrayList<HouseVO> getLatLng(){
+		ArrayList<HouseVO> list = new ArrayList<HouseVO>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select lat,lng from house ";
+		
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				HouseVO h = new HouseVO();
+				h.setLat(rs.getString("lat"));
+				h.setLng(rs.getString("lng"));
+				list.add(h);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("예외발생: "+e.getMessage());
+		} finally {
+			if(rs != null) {try{rs.close();} catch(SQLException e){}}
+			if(pstmt != null) {try{pstmt.close();} catch(SQLException e){}}
+			if(conn != null) {try{conn.close();} catch(SQLException e){}}
+		}
+		
+		return list;
+	}
 	
 	// 추천 매물(조회순으로 정렬) 불러오기 메소드
 	public ArrayList<RecommendVO> findByHit(){
@@ -33,7 +64,7 @@ public class HouseDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select h.house_no, deposit, type, deal_type, price, state, img_fname "
+		String sql = "select h.house_no, house_name, deposit, type, deal_type, floor, price, area, state, img_fname "
 				+ "from house h, img i where h.house_no=i.house_no "
 				+ "and img_no in (select min(img_no) from img group by house_no) order by hit desc";
 		

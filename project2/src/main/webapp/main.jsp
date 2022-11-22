@@ -82,13 +82,17 @@
 					  nextArrow:$('.next'),
 					  prevArrow:$('.prev')
 				});
+				
+				
 			}
 		});
 		
 		$(document).on("click",".post",function(){
 			$(this).css("cursor","pointer");
+			var house_no = $(this).attr("house_no");
+			console.log($(this).attr("house_no"));
+			location.href = "detailHouse.jsp?"+ house_no;
 		});
-		
 	});
 </script>
 </head>
@@ -110,12 +114,12 @@
 	
 	<main>
 		<div class="searchDiv">
-			<form action="search.do" method="post" class="searchBox">
+			<form action="search.do" method="post" class="searchWrapper">
 				<div class="searchMenu">
-					<span class="searchCol" id="all">전체</span>
-					<span class="searchCol" id="oneRoom" name="원룸">원룸</span>
-					<span class="searchCol" id="twoRoom" name="투룸">투룸</span>
-					<span class="searchCol" id="officetel" name="오피스텔">오피스텔</span>
+					<span class="searchCol" id="all">전체</span><!--  
+					--><span class="searchCol" id="oneRoom" name="원룸">원룸</span><!--
+					--><span class="searchCol" id="twoRoom" name="투룸">투룸</span><!--
+					--><span class="searchCol" id="officetel" name="오피스텔">오피스텔</span>
 				</div>
 				<input type="hidden" name="searchCol" id="searchCol">
 				<fieldset id="searchBox">
@@ -127,7 +131,6 @@
 
 		<!-- 추천 매물 -->
 		<div class="page-wrapper" style="position:relative;">
-
 	      <!--page slider -->
 	      <div class="post-slider">
 	        <h3 class="silder-title">홍대입구역 근처 추천 매물</h3>
@@ -136,45 +139,16 @@
 	        <i class="fa-solid fa-chevron-left prev"></i>      
 	        <i class="fa-solid fa-chevron-right next"></i>
 	        <div class="post-wrapper">
-	          <!-- <div class="post">
-	            <img src="images/house1.jpg" class="slider-image">
-	            <div class="post-info">
-	              <h4><a href="#" class="post-subject">홍대풍광맛집1호</a></h4>
-	            </div>
-	          </div>
-	          <div class="post">
-	            <img src="images/house2.jpg" class="slider-image">
-	            <div class="post-info">
-	              <h4><a href="#">홍대원룸</a></h4>
-	            </div>
-	          </div>
-	          <div class="post">
-	            <img src="images/house3.jpg" class="slider-image">
-	            <div class="post-info">
-	              <h4><a href="#">쌍용투룸</a></h4>
-	            </div>
-	          </div>
-	          <div class="post">
-	            <img src="images/house4.jpg" class="slider-image">
-	            <div class="post-info">
-	              <h4><a href="#">서교오피스텔</a></h4>
-	            </div>
-	          </div> -->
 	        </div>
 	      </div>
 	      <!--post slider-->
     	</div>
-
-		
-
 	</main>
-
 	<footer>
 	 	<p>
 	 		<span> Semi-final Team </span>
 	 		<span> 서울시 마포구 서교동 </span>
 	 	</p>
 	</footer>
-
 </body>
 </html>
