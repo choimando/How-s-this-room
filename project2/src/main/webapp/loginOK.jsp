@@ -10,9 +10,9 @@
 <body>
 	<c:if test="${re > 0 }">
 		<script type="text/javascript">
-			var data = "${id}";
-			sessionStorage.removeItem("data");
-			sessionStorage.setItem("data",data);
+			var key = "${id}";
+			sessionStorage.removeItem("key");
+			sessionStorage.setItem("key",key);
 			alert("로그인 성공");
 			location.href = "main.jsp";
 			

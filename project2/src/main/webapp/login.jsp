@@ -75,12 +75,6 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	/*$("#btnLogin").click(function(){
-		var data = $("#id").val();
-		sessionStorage.setItem("data",id); // 아이디를 담은 키
-		
-		var key = sessionStorage.getItem()
-	});*/
 });
 </script>
 

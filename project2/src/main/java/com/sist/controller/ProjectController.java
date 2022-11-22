@@ -42,7 +42,7 @@ public class ProjectController extends HttpServlet {
 		
 		String path = config.getServletContext().getRealPath("WEB-INF");
 		try {
-			FileReader fr = new FileReader(path + "/project.properties");
+			FileReader fr = new FileReader(path + "/sist.properties");
 			Properties prop = new Properties();
 			prop.load(fr);
 			Iterator iter = prop.keySet().iterator();
@@ -51,6 +51,8 @@ public class ProjectController extends HttpServlet {
 				
 				String clsName = (String)prop.get(cmd);
 				map.put(cmd, (ProjectAction)Class.forName(clsName).newInstance());
+				
+			
 			}
 			
 		
