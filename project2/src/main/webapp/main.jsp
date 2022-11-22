@@ -46,31 +46,67 @@
 		});
 		
 		/* 슬라이더 함수 */
-		$('.post-wrapper').slick({
+		/* $(document).on('slick','.post-wrapper',function(){
 			 slidesToShow: 3,
 			  slidesToScroll: 1,
 			  autoplay: true,
 			  autoplaySpeed: 2000,
 			  nextArrow:$('.next'),
 			  prevArrow:$('.prev')
+		}); */
+		
+		
+		
+		
+		/* 슬라이더 Ajax */
+		$.ajax({
+			url:"RecommendHouse",
+			success:function(arr){
+				$.each(arr,function(){
+					var postDiv = $("<div></div>").addClass("post");
+					var img = $("<img>").addClass("slider-image").attr("src","images/"+this.img_fname);
+					var infoDiv = $("<div></div>").addClass("post-info");
+					var type = $("<span></span>").html(this.type);
+					var h4 = $("<h4></h4>").html(this.deal_type+" "+this.deposit+"/"+this.price);
+					$(infoDiv).append(type,h4);
+					$(postDiv).append(img,infoDiv).attr("house_no",this.house_no);
+					$(".post-wrapper").append(postDiv);
+					console.log(this.img_fname);
+				});	
+				
+				$('.post-wrapper').slick({
+					 slidesToShow: 3,
+					  slidesToScroll: 1,
+					  autoplay: true,
+					  autoplaySpeed: 2000,
+					  nextArrow:$('.next'),
+					  prevArrow:$('.prev')
+				});
+			}
 		});
+		
+		$(document).on("click",".post",function(){
+			$(this).css("cursor","pointer");
+		});
+		
 	});
 </script>
 </head>
 <body>
-	<header id="forMain_header">
-		<h1><a id="main_link" href="main.jsp">이방어때</a></h1>
-		<nav id="topMenu">
-			<ul>
-				<li><a class="menu_link" href="loadHouse.do">지도</a></li>
-				<li><a class="menu_link" href="#">관심목록</a></li>
-				<li><a class="menu_link" href="#">방내놓기</a></li>
-				<li><a class="menu_link" href="#">알림</a></li>
-				<li><a class="menu_link" href="#">로그인/회원가입</a></li>
-			</ul>
-		</nav>
-	</header>
-	
+<div id="wrap">
+	<div id="forMain_header_wrap">
+		<header id="forMain_header">
+			<h1><a id="main_link" href="main.jsp">이방어때</a></h1>
+			<nav id="topMenu">
+				<ul>
+					<li><a class="menu_link" href="loadHouse.do">지도</a></li>
+					<li><a class="menu_link" href="#">관심목록</a></li>
+					<li><a class="menu_link" href="#">방내놓기</a></li>
+					<li><a class="menu_link" href="#">알림</a></li>
+					<li><a class="menu_link" href="#">로그인/회원가입</a></li>
+			</nav>
+		</header>
+	</div>
 	
 	<main>
 		<div class="searchDiv">
@@ -82,24 +118,25 @@
 					<span class="searchCol" id="officetel" name="오피스텔">오피스텔</span>
 				</div>
 				<input type="hidden" name="searchCol" id="searchCol">
-				<input type="text" name="searchWord" id="searchWord" placeholder="원하는 지역을 입력해 주세요">
-				<button type="submit" id="searchBtn"><i class="fas fa-search"></i></button>
+				<fieldset id="searchBox">
+					<input type="search" name="searchWord" id="searchWord" placeholder="원하는 지역을 입력해 주세요">
+					<button type="submit" id="searchBtn"><i class="fa fa-search"></i></button>
+				</fieldset>
 			</form>
-			
 		</div>
-		
+
 		<!-- 추천 매물 -->
 		<div class="page-wrapper" style="position:relative;">
 
 	      <!--page slider -->
 	      <div class="post-slider">
-	        <h3 class="silder-title">홍대입구역 근처 방</h3>
+	        <h3 class="silder-title">홍대입구역 근처 추천 매물</h3>
 	        <!-- <i class="fas fa-chevron-left prev" aria-hidden="true"></i> 
 	        <i class="fas fa-chevron-right next" aria-hidden="true"></i>  -->
 	        <i class="fa-solid fa-chevron-left prev"></i>      
 	        <i class="fa-solid fa-chevron-right next"></i>
 	        <div class="post-wrapper">
-	          <div class="post">
+	          <!-- <div class="post">
 	            <img src="images/house1.jpg" class="slider-image">
 	            <div class="post-info">
 	              <h4><a href="#" class="post-subject">홍대풍광맛집1호</a></h4>
@@ -122,54 +159,22 @@
 	            <div class="post-info">
 	              <h4><a href="#">서교오피스텔</a></h4>
 	            </div>
-	          </div>
+	          </div> -->
 	        </div>
 	      </div>
 	      <!--post slider-->
     	</div>
+
 		
-		<!-- <div class="slider-wrapper" style="position:relative;">
-			<div class="post-slider">
-				<h3 class="slider-title">홍대입구역 주변 추천 매물</h3>
-				<i class="fa-solid fa-chevron-left prev"></i>      
-       			<i class="fa-solid fa-chevron-right next"></i>
-       			<div class="post-wrapper">
-       				<div class="post">
-       					<img src="images/house1.jpg" class="slider-image">
-       					<div class="post-info">
-       						<h4>원룸</h4>
-       						<h5>월세 1000/60</h5>
-       					</div>
-       				</div>
-       				<div class="post">
-       					<img src="images/house2.jpg" class="slider-image">
-       					<div class="post-info">
-       						<h4>원룸2</h4>
-       						<h5>월세 1000/60</h5>
-       					</div>
-       				</div>
-       				<div class="post">
-       					<img src="images/house3.jpg" class="slider-image">
-       					<div class="post-info">
-       						<h4>투룸</h4>
-       						<h5>월세 1000/60</h5>
-       					</div>
-       				</div>
-       				<div class="post">
-       					<img src="images/house4.jpg" class="slider-image">
-       					<div class="post-info">
-       						<h4>오피스텔</h4>
-       						<h5>월세 1000/60</h5>
-       					</div>
-       				</div>
-       			</div>
-			</div>
-		</div> -->
-		
+
 	</main>
-	
+
 	<footer>
-	
+	 	<p>
+	 		<span> Semi-final Team </span>
+	 		<span> 서울시 마포구 서교동 </span>
+	 	</p>
 	</footer>
+
 </body>
 </html>
