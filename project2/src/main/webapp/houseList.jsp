@@ -6,194 +6,128 @@
 <head>
 <meta charset="UTF-8">
 <title>이방어때 지도</title>
-<style type="text/css">
-	* {
-		margin: 0;
-		padding: 0;
-	}
-	
-	body {
-		/* overflow: hidden; */
-	}
-
-	#map {
-		overflow: hidden;
-	}
-	
-	#contentWrap {
-		flex-grow: 1;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		min-width: 1200px;
-		max-height: 800px;
-		position: relative;
-	
-	}
-	
-	.subHeader {
-		flex: 0 0 auto;
-		display: flex;
-		width: 100%;
-		height: 64px;
-		border-bottom: 1px solid rgb(205,205,205);
-		background-color: rgb(255,255,255);
-		z-index: 900;
-	}
-	
-	.house_searchWrap {
-		flex: 0 0 auto;
-		display: flex;
-		align-items: center;
-		width: 400px;
-		height: 100%;
-		padding: 0px 20px;
-		border-right: 1px solid rgb(231,231,231);
-		position: relative;
-	
-	}
-	
-	.house_searchForm {
-		flex-grow: 1;
-		width: 0px;
-		height: 36px;
-		padding-left: 30px;
-		padding-right: 20px;
-		background: yellow;
-	}
-	
-	#house_search {
-		width: 100%;
-		height: 36px;
-		padding: 0px;
-		border: 0px;
-	}
-	
-	.subContentWrap {
-		-webkit-box-flex: 1;
-	    flex-grow: 1;
-	    display: flex;
-	    width: 100%;
-	    height: 100%;
-	    position: relative;
-	}
-	
-	#mapWrap {
-		flex-grow: 1;
-		position: relative;
-		width: 100%;
-		z-index:10;
-	}
-	
-	#listDiv {
-		flex: 0 0 auto;
-		display: flex;
-		flex-direction: column;
-		width: 280px;
-		max-height: 640px;
-		border-right: 1px solid rgb(231,231,231);
-		position: relative;
-		overflow: scroll;
-		background: pink;
-		z-index: 20;
-	}
-	
-	.listWrap {
-		flex: 0 0 auto;
-		display: flex;
-		flex-direction: column;
-		width: 280px;
-		height: 100%;
-		border-right: 1px solid rgb(231,231,231);
-		position: relative;
-		overflow: scroll;
-		background: pink;
-		z-index: 20;
-	}
-	
-	.house_img {
-		flex: 0 0 auto;
-	    width: 140px;
-	    height: 168px;
-	    min-height: 140px;
-	    position: relative;
-	}
-	
-	
-	/* .mostly-customized-scrollbar {
-		display: block;
-		width: 280px;
-		overflow: auto;
-		height: 432px;
-	}
-	
-	/* "대부분 커스터마이징된" 스크롤바
-	 * (width/height가 지정되지 않으면 보이지 않음 */
-	.mostly-customized-scrollbar::-webkit-scrollbar {
-		width: 5px;
-		height: 8px;
-		background-color: #aaa; /* 또는 트랙에 추가한다 */
-		z-index: 30;
-	}
-	
-	/* 썸(thumb) 추가 */
-	.mostly-customized-scrollbar::-webkit-scrollbar-thumb {
-		background: #000;
-		z-index: 30;
-	} */
-	
-	#active {
-		color: #F6323E;
-	}
-	
-</style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<!-- 카카오맵 API -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=12e06872dba1199aee65af50b2693e45"></script>
+<!-- 카카오맵 API + services 라이브러리 추가 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=12e06872dba1199aee65af50b2693e45&libraries=services"></script>
 <!-- 카카오맵 -->
 <!-- css 파일 -->
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="houseList_style.css">
 <!-- css 파일 -->
 <script src="https://kit.fontawesome.com/def66b134a.js" crossorigin="anonymous"></script>
+<!-- 화살표, 검색 버튼 아이콘 제공 태그 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <script type="text/javascript">
 	$(function(){
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = { 
+	        center: new kakao.maps.LatLng(37.5553, 126.9215), // 지도의 중심좌표 - 홍대입구역
+	        level: 3 // 지도의 확대 레벨
+	    };
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		var markerImage = new kakao.maps.MarkerImage("images/marker.png",new kakao.maps.Size(60, 60),{offset: new kakao.maps.Point(27, 69)});
+		// 마커를 생성하고 지도위에 표시하는 함수
+		function addMarker(position) {
+			
+		    // 마커를 생성
+		    var marker = new kakao.maps.Marker({
+		        position: position,
+		        image: markerImage
+		    });
+
+		    // 마커가 지도 위에 표시되도록 설정
+		    marker.setMap(map);
+		    
+		    // 생성된 마커를 배열에 추가
+		    markers.push(marker);
+		}
+
+		// 배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수
+		function setMarkers(map) {
+		    for (var i = 0; i < markers.length; i++) {
+		        markers[i].setMap(map);
+		    }            
+		}
+		
+		var markers = [];
+		var positions = [];
+		
 		// 각 페이지 맞게 헤더 글씨 색상 변경
 		$("#houseListPage").css("color","#F6323E");
 		
-		$("#topMenu .menu_link").click(function(){
-			alert($(this).html());
+		$.ajax({
+			url:"RecommendHouse",
+			success:function(arr){
+				// markers 비워주기
+				for(i=0; i<markers.length; i++){
+					markers[i].setMap(null);
+				}
+				markers = [];
+				
+				$.each(arr,function(){
+					console.log(this);
+					
+					// 마커 하나를 지도위에 표시합니다 
+					addMarker(new kakao.maps.LatLng(this.lat, this.lng));
+					
+				});
+				
+				setMarkers(map);
+				
+				}
+		}); 
+		
+		// 검색
+		$("#map_searchBtn").click(function(e){
+			var searchWord = $("#house_search").val(); 
+			console.log(searchWord);
+					
+			$.ajax({
+				url:"SearchHouse",
+				data:{searchWord:searchWord},
+				success:function(arr){
+					$(".list").css("display","none");
+					
+					// markers 비워주기
+					for(i=0; i<markers.length; i++){
+						markers[i].setMap(null);
+					}
+					markers = [];
+					
+					$.each(arr,function(){
+						console.log(this);
+						var div1 = $("<div></div>").addClass("list");
+						var div2 = $("<div></div>").addClass("innerList");
+						var img = $("<img>").addClass("house_img").attr("src","images/"+this.img_fname);
+						var div3 = $("<div></div>").addClass("house_info");
+						var h3 = $("<h3></h3>").html(this.house_name).addClass("house_info_name");
+						var p1 = $("<p></p>").html(this.type).addClass("house_info_type");
+						var p2 = $("<p></p>").html(this.deal_type+" "+this.deposit+"/"+this.price).addClass("house_info_price");
+						var p3 = $("<p></p>").html(this.area+"평 "+this.floor+"층").addClass("house_info_area");
+						$(div3).append(h3,p1,p2,p3);
+						$(div2).append(img,div3);
+						$(div1).append(div2);
+						$(".listWrap").append(div1);
+						
+						// 마커 하나를 지도위에 표시합니다 
+						addMarker(new kakao.maps.LatLng(this.lat, this.lng));
+						
+					});
+					
+					setMarkers(map);
+					
+					}
+			}); 
 			
+			e.preventDefault();
 		});
 		
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	    mapOption = { 
-	        center: new kakao.maps.LatLng(37.5553, 126.9215), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
-	    };
-	
-		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		console.log($(document).height()); 
 		
-		$("#moveSist").click(function(){
-			// 이동할 위도 경도 위치를 생성합니다 
-		    var moveLatLon = new kakao.maps.LatLng(37.5566, 126.9195);
-		    
-		    // 지도 중심을 부드럽게 이동시킵니다
-		    // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-		    map.panTo(moveLatLon);     
-		    
-			// 마커를 생성합니다
-		    var marker = new kakao.maps.Marker({
-		        position: moveLatLon
-		    });
-
-		    // 마커가 지도 위에 표시되도록 설정합니다
-		    marker.setMap(map);
+		$(window).scroll(function(){
+			console.log($(window).scrollTop()); 
 		});
-		
-		console.log($(document).height());
-		
 		
 	});
 
@@ -217,24 +151,27 @@
 		<div id="contentWrap">
 			<div class="subHeader">
 				<div class="house_searchWrap">
-					<form action="" class="house_searchForm">
-						<input type="search" id="house_search">
+					<form action="" class="house_searchForm" id="searchForm">
+						<input type="search" id="house_search" placeholder="지역명을 입력해주세요">
 					</form>
-					<i class=''></i>
+					<button type="submit" id="map_searchBtn" class="btn red rounded">검색</button>
 				</div>
 			</div>
 			
 			<div class="subContentWrap">
-				<div id="listDiv">
-					<div class="listWrap mostly-customized-scrollbar">
+				<div id="listDiv" class="mostly-customized-scrollbar">
+					<div class="listWrap">
 						<c:forEach var="h" items="${list }">
 							<div class="list">
-								${h.house_name }<br>
-								${h.type }<br>
-								${h.deal_type }<br>
-								${h.price }<br>
-								${h.loc }<br>
-								<img src="images/${h.img_fname }" class="house_img">
+								<div class="innerList">
+									<img src="images/${h.img_fname }" class="house_img">
+									<div class="house_info">
+										<h3 class="house_info_name">${h.house_name }</h3>
+										<p class="house_info_type">${h.type }</p>
+										<p class="house_info_price">${h.deal_type } ${h.deposit }/${h.price }</p>
+										<p class="house_info_area">${h.area}평 ${h.floor }층</p>										
+									</div>
+								</div>
 							</div>
 						</c:forEach>
 					</div>
@@ -245,16 +182,5 @@
 			</div>
 		</div>
 	</main>
-	
-	
-	<%-- <c:forEach var="h" items="${list }">
-		
-		${h.house_name }<br>
-		${h.type }<br>
-		${h.deal_type }<br>
-		${h.price }<br>
-		${h.loc }<br>
-		<hr>
-	</c:forEach> --%>
 </body>
 </html>

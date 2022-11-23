@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sist.dao.HouseDAO;
 import com.sist.vo.HouseVO;
+import com.sist.vo.RecommendVO;
 
 public class SearchAction implements ProjectAction {
 
@@ -20,7 +21,7 @@ public class SearchAction implements ProjectAction {
 		System.out.println("searchCol: "+searchCol);
 		
 		HouseDAO dao = HouseDAO.getInstance();
-		ArrayList<HouseVO> list = dao.findAll(searchCol);
+		ArrayList<RecommendVO> list = dao.findAll(searchCol);
 		request.setAttribute("list", list);
 		
 		return "houseList.jsp";
