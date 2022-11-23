@@ -139,9 +139,21 @@
 	input[type="radio"]{
 		display:none;
 	}
+	input[type="checkbox"]{
+		display:none;
+	}
 	input[type="radio"]+span{
 		display: inline-block;
-        padding: 15px 10px;
+        padding: 10px 10px;
+        border: 1px solid #dfdfdf;
+        background-color: #ffffff;
+        text-align: center;
+        cursor: pointer;
+	}
+	
+	input[type="checkbox"]+span{
+		display: inline-block;
+        padding: 10px 10px;
         border: 1px solid #dfdfdf;
         background-color: #ffffff;
         text-align: center;
@@ -150,6 +162,11 @@
 	  input[type="radio"]:checked + span {
         background-color: #000000;
         color: #ffffff;
+        
+        }
+        input[type="checkbox"]:checked + span {
+        background-color: #cccccc;
+        color: #333333;
         
         }
 	#btnRegister{
@@ -207,10 +224,11 @@
 				<h2>매물 종류</h2>
 					<table>
 						<tr>
-							<label>종류 선택</label>
+							<td><label>종류 선택</label>
 							<label class="input_chk_radio"><input type="radio" id="input_radio_type" name="type" class='input_chk' value="원룸" ><span>원룸</span></label>
 							<label class="input_chk_radio"><input type="radio" id="input_radio_type" name="type" class='input_chk' value="투룸"><span>투룸</span></label>
 							<label class="input_chk_radio"><input type="radio" id="input_radio_type" name="type" class='input_chk' value="오피스텔"><span>오피스텔</span></label>
+							</td>
 						</tr>
 						
 						<tr>
@@ -260,94 +278,92 @@
 						<tr>
 							<td>
 								<label>관리비&nbsp;&nbsp;</label>
-								<input type="number" id="insert_mgr" class='input_chk' name="mgr">만원&nbsp;&nbsp;&nbsp;
-								협의 가능<input type="radio" name="" value="Y" class="">
-								관리비 없음<input type="radio" name="" value="N" class=""><br><br>
+								 <input type="number" id="insert_mgr" class='input_chk' name="mgr">만원&nbsp;&nbsp;&nbsp;
+								
 								<hr>
 								
 								<div><label>관리비항목</label>
-									<label>&nbsp;&nbsp;<input type="checkbox" id="mgr_elec"  name="mgr_elec" value="전기세" class="input_chk_mgr">전기세</label>
-									<label>&nbsp;&nbsp;<input type="checkbox" id="mgr_water" name="mgr_water" value="수도세" class="input_chk_mgr">수도세</label>
-									<label>&nbsp;&nbsp;<input type="checkbox" id="mgr_etc" name="mgr_internet" value="인터넷" class="input_chk_mgr">인터넷</label>		
-									<label>&nbsp;&nbsp;<input type="checkbox" id="mgr_gas" name="mgr_gas" value="가스비" class="input_chk_mgr">가스비</label>
-									<label>&nbsp;&nbsp;<input type="checkbox" id="mgr_park" name="mgr_park" value="주차비" class="input_chk_mgr">주차비</label>
+									<label><input type="checkbox" id="mgr_elec"  name="mgr_elec" value="전기세" class="input_chk_mgr"><span>전기세</span></label>
+									<label><input type="checkbox" id="mgr_water" name="mgr_water" value="수도세" class="input_chk_mgr"><span>수도세</span></label>
+									<label><input type="checkbox" id="mgr_etc" name="mgr_internet" value="인터넷" class="input_chk_mgr"><span>인터넷</span></label>		
+									<label><input type="checkbox" id="mgr_gas" name="mgr_gas" value="가스비" class="input_chk_mgr"><span>가스비</span></label>
+									<label><input type="checkbox" id="mgr_park" name="mgr_park" value="주차비" class="input_chk_mgr"><span>주차비</span></label>
 								
 								</div>				
 							</td>
-						<tr><br>
+						<tr>
 						
 						<tr>
 							<td>엘리베이터&nbsp;&nbsp;
-							<label>가능&nbsp;<input type="radio" name="opt_elevator" value="Y"></label>
-							<label>불가능&nbsp;<input type="radio" name="opt_elevator" value="N"></label>
+							<label class="input_chk_radio"><input type="radio" name="opt_elevator" value="Y"><span>가능&nbsp;</span></label>
+							<label class="input_chk_radio"><input type="radio" name="opt_elevator" value="N"><span>불가능&nbsp;</span></label>
 							</td>
 						</tr>
-						<br>
+						
 						<tr>
 							<td>발코니&nbsp;&nbsp;
-							<label>가능&nbsp;<input type="radio" name="opt_valcony" value="Y"></label>
-							<label>불가능&nbsp;<input type="radio" name="opt_valcony" value="N"></label>
+							<label><input type="radio" name="opt_valcony" value="Y"><span>가능</span></label>
+							<label><input type="radio" name="opt_valcony" value="N"><span>불가능</span></label>
 							</td>
-						</tr><br>
+						</tr>
 						<tr><td>주차여부&nbsp;&nbsp;
-							<label>가능&nbsp;<input type="radio" name="opt_park" value="Y"></label>
-							<label>불가능&nbsp;<input type="radio" name="opt_park" value="N"></label>
+							<label><input type="radio" name="opt_park" value="Y"><span>가능</span></label>
+							<label><input type="radio" name="opt_park" value="N"><span>불가능</span></label>
 							</td>
-						</tr><br>
+						</tr>
 						<tr><td>빌트인&nbsp;&nbsp;
-							<label>있음&nbsp;<input type="radio" name="opt_builtin" value="Y"></label>
-							<label>없음&nbsp;<input type="radio" name="opt_builtin" value="N"></label>
+							<label><input type="radio" name="opt_builtin" value="Y"><span>있음</span></label>
+							<label><input type="radio" name="opt_builtin" value="N"><span>없음</span></label>
 							</td>
 						</tr>
 						<tr><td>세탁기&nbsp;&nbsp;
-							<label>있음&nbsp;<input type="radio" name="opt_washer" value="Y"></label>
-							<label>없음&nbsp;<input type="radio" name="opt_washer" value="N"></label>
+							<label><input type="radio" name="opt_washer" value="Y"><span>있음</span></label>
+							<label><input type="radio" name="opt_washer" value="N"><span>없음</span></label>
 							</td>
 						</tr>
 						<tr><td>가스레인지&nbsp;&nbsp;
-							<label>있음&nbsp;<input type="radio" name="opt_gas" value="Y"></label>
-							<label>없음&nbsp;<input type="radio" name="opt_gas" value="N"></label>
+							<label><input type="radio" name="opt_gas" value="Y"><span>있음</span></label>
+							<label><input type="radio" name="opt_gas" value="N"><span>없음</span></label>
 							</td>
 						</tr>
 						<tr><td>전자레인지&nbsp;&nbsp;
-							<label>있음&nbsp;<input type="radio" name="opt_micro" value="Y"></label>
-							<label>없음&nbsp;<input type="radio" name="opt_micro" value="N"></label>
+							<label><input type="radio" name="opt_micro" value="Y"><span>있음</span></label>
+							<label><input type="radio" name="opt_micro" value="N"><span>없음</span></label>
 							</td>
 						</tr>
 						<tr><td>냉장고&nbsp;&nbsp;
-							<label>있음&nbsp;<input type="radio" name="insert_refrige" value="Y"></label>
-							<label>없음&nbsp;<input type="radio" name="insert_refrige" value="N"></label>
+							<label><input type="radio" name="insert_refrige" value="Y"><span>있음</span></label>
+							<label><input type="radio" name="insert_refrige" value="N"><span>없음</span></label>
 							</td>
 						</tr>
 						<tr>
 							<td>
 								<label>옵션항목&nbsp;&nbsp;</label>
-								<input type="checkbox" name="opt_check" value="주차장"><label>주차장&nbsp;</label>
-								<input type="checkbox" name="opt_check" value="에어컨"><label>에어컨&nbsp;</label>
-								<input type="checkbox" name="opt_check" value="냉장고"><label>냉장고&nbsp;</label>
-								<input type="checkbox" name="opt_check" value="세탁기"><label>세탁기&nbsp;</label>
-								<input type="checkbox" name="opt_check" value="가스레인지"><label>가스레인지&nbsp;</label>
-								<input type="checkbox" name="opt_check" value="전자레인지"><label>전자레인지&nbsp;</label>
-								<input type="checkbox" name="opt_check" value="엘리베이터"><label>엘리베이터&nbsp;</label>
-								<input type="checkbox" name="opt_check" value="빌트인"><label>빌트인&nbsp;</label><br>
+								<label><input type="checkbox" name="opt_check" value="주차장"><span>주차장</span></label>
+								<label><input type="checkbox" name="opt_check" value="에어컨"><span>에어컨</span></label>
+								<label><input type="checkbox" name="opt_check" value="냉장고"><span>냉장고</span></label>
+								<label><input type="checkbox" name="opt_check" value="세탁기"><span>세탁기</span></label>
+								<label><input type="checkbox" name="opt_check" value="가스레인지"><span>가스레인지</span></label>
+								<label><input type="checkbox" name="opt_check" value="전자레인지"><span>전자레인지</span></label>
+								<label><input type="checkbox" name="opt_check" value="엘리베이터"><span>엘리베이터</span></label>
+								<label><input type="checkbox" name="opt_check" value="빌트인"><span>빌트인</span></label><br>
 							</td>
 							
 							
 						</tr>
 						<tr>
-						<td><br>
+						<td>
 								<label>보안시설&nbsp;&nbsp;</label>
-								<input type="checkbox" name="cctv" value="Y"><label>CCTV&nbsp;</label>
-								<input type="checkbox" name="videophone" value="Y"><label>비디오폰&nbsp;</label>
-								<input type="checkbox" name="interphone" value="Y"><label>인터폰&nbsp;</label>
-								<input type="checkbox" name="firealarm" value="Y"><label>화재경보&nbsp;</label>
-								<input type="checkbox" name="frontdoor" value="Y"><label>프론트도어&nbsp;</label>
+								<label><input type="checkbox" name="cctv" value="Y"><span>CCTV</span></label>
+								<label><input type="checkbox" name="videophone" value="Y"><span>비디오폰</span></label>
+								<label><input type="checkbox" name="interphone" value="Y"><span>인터폰</span></label>
+								<label><input type="checkbox" name="firealarm" value="Y"><span>화재경보</span></label>
+								<label><input type="checkbox" name="frontdoor" value="Y"><span>프론트도어</span></label>
 							</td>
 						</tr>
 					</table>	
 				</div>
-			</section>-->
-			
+			</section>
 			<section id="loc">
 			<div id="div_input_info">
 				<table>
@@ -356,10 +372,9 @@
 						<th>주소</th>
 						<td>
 							<input type="hidden" name="place">
-							<input type="text" size="40" name="loc" id="address" class="essential" value=""><br>
-							LAT:<input type="hidden" name='lat' class="input_chk" value="" id="lat"><br>
-							LNG:<input type="hidden" name='lng' class="input_chk" value="" id="lng"><br>
-											
+							<input type="text" size="40" name="loc" id="address" class="essential" value="">
+							<input type="hidden" name='lat' class="input_chk" value="" id="lat">
+							<input type="hidden" name='lng' class="input_chk" value="" id="lng">			
 						</td>
 					</tr>
 				</table>
@@ -372,7 +387,7 @@
 				<tr>
 					<th>제목</th>
 					<td><textarea class='input_chk'rows="1" cols="100" name="house_name" value="input_Title"></textarea> </td>
-				</tr><br>
+				</tr>
 				<tr>
 					<th>상세 설명</th>
 					<td><textarea  class='input_chk' rows="5" cols="100" name="detail" value="input_detail"></textarea> </td>
@@ -389,7 +404,7 @@
 			</section>
 			<div id="div_input_info">
 			위에 추가안한 요소:<br>
-			13ID:<input type="hidden" id="id" name='id' class="input_chk" value=""><br>
+			ID:<input type="hidden" id="id" name='id' class="input_chk" value=""><br>
 			등록일:<input type="date" id="house_regdate" name='house_regdate' class="input_chk" value=""/><br>
 			</div>
 			<button id="btnRegister">등록하기</button><br>
