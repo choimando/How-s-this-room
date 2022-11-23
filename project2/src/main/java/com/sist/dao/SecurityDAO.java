@@ -1,6 +1,7 @@
 package com.sist.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,16 +12,50 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.sist.vo.MgrVO;
+import com.sist.vo.OptVO;
 import com.sist.vo.SecurityVO;
 
 public class SecurityDAO {
-	public static SecurityDAO dao;
+	private static SecurityDAO dao;
 	
-	public SecurityDAO getInstance(){
+	public static SecurityDAO getInstance(){
 		if(dao == null) {
 			dao = new SecurityDAO();
 		}
 		return dao;
+	}
+	private SecurityDAO() {
+		
+	}
+	
+	public int insertSecurity(SecurityVO s) {
+		//insert into security(house_no,cctv,videophone,interphone,firealarm,frontdoor) values(?,?,?,?,?,?);
+		//insert into mgr(house_no,mgr_elec,mgr_water,mgr_internet,mgr_gas,mgr_park) values(seq_house_no.nextval,?,?,?,?,?)
+		//insert into opt(house_no,opt_park,opt_aircon,opt_refrige,opt_washer,opt_gas,opt_micro,opt_elevator,opt_builtin) values(?,?,?,?,?,?,?,?,?);
+		int re = -1;
+		String sql = "insert into security(house_no,cctv,videophone,interphone,firealarm,frontdoor) values(?,?,?,?,?,?)";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn =ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, s.getHouse_no());
+			pstmt.setString(2, s.getCctv());
+			pstmt.setString(3, s.getViedophone());
+			pstmt.setString(4, s.getInterphone());
+			pstmt.setString(5, s.getFirealarm());
+			pstmt.setString(6, s.getFrontdoor());
+					
+			re = pstmt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("예외발생:"+e.getMessage());;
+		}finally {
+			if(pstmt !=null ) { try {pstmt.close();} catch(Exception e) {} }
+			if(conn !=null ) { try {conn.close();} catch(Exception e) {} }
+		}
+		return re;
 	}
 	
 	private ArrayList<SecurityVO> findByHouseNo(int house_no){

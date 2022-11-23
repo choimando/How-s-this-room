@@ -1,6 +1,7 @@
 package com.sist.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,16 +12,43 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.sist.vo.ImgVO;
+import com.sist.vo.InsertHouseVO;
 import com.sist.vo.OptVO;
 
 public class ImgDAO {
-	public static ImgDAO dao;
+	private static ImgDAO dao;
 	
-	public ImgDAO getInstance() {
+	public static ImgDAO getInstance() {
 		if(dao == null) {
 			dao = new ImgDAO();
 		}
 		return dao;
+	}
+	private ImgDAO(){
+		
+	}
+	
+	public int insertImg(ImgVO img) {
+		int re = -1;
+		String sql = "insert into img(img_no,img_fname,house_no) values(?,?,?)";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn =ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, img.getImg_no());
+			pstmt.setString(2, img.getImg_fname());
+			pstmt.setInt(3, img.getHouse_no());
+			re = pstmt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("예외발생:"+e.getMessage());;
+		}finally {
+			if(pstmt !=null ) { try {pstmt.close();} catch(Exception e) {} }
+			if(conn !=null ) { try {conn.close();} catch(Exception e) {} }
+		}
+		return re;
 	}
 	
 	private ArrayList<ImgVO> findByHouseNo(int house_no){

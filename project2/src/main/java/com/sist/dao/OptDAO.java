@@ -2,6 +2,7 @@ package com.sist.dao;
 
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,6 +26,40 @@ public class OptDAO {
 	
 	private OptDAO() {		
 	}	
+	//매물등록 했을때 옵션을 눌렀을때 opt 테이블에 '전기세'value 값을 넣어주는 메소드 
+	public int insertOpt(OptVO o) {
+		
+		//insert into mgr(house_no,mgr_elec,mgr_water,mgr_internet,mgr_gas,mgr_park) values(seq_house_no.nextval,?,?,?,?,?)
+		//insert into opt(house_no,opt_park,opt_aircon,opt_refrige,opt_washer,opt_gas,opt_micro,opt_elevator,opt_builtin) values(?,?,?,?,?,?,?,?,?);
+		int re = -1;
+		String sql = "insert into opt(house_no,opt_park,opt_aircon,opt_refrige,opt_washer,opt_gas,opt_micro,opt_elevator,opt_builtin) values(?,?,?,?,?,?,?,?,?)";
+		Connection conn = null;
+		
+		PreparedStatement pstmt = null;
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource)context.lookup("java:/comp/env/mydb");
+			conn =ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, o.getHouse_no());
+			pstmt.setString(2, o.getOpt_park());
+			pstmt.setString(3, o.getOpt_aircon());
+			pstmt.setString(4, o.getOpt_refrige());
+			pstmt.setString(5, o.getOpt_washer());
+			pstmt.setString(6, o.getOpt_gas());
+			pstmt.setString(7, o.getOpt_micro());
+			pstmt.setString(8, o.getOpt_elevator());
+			pstmt.setString(9, o.getOpt_builtin());
+			
+			re = pstmt.executeUpdate();
+		}catch(Exception e) {
+			System.out.println("예외발생:"+e.getMessage());;
+		}finally {
+			if(pstmt !=null ) { try {pstmt.close();} catch(Exception e) {} }
+			if(conn !=null ) { try {conn.close();} catch(Exception e) {} }
+		}
+		return re;
+	}
 	
 	public ArrayList<OptVO> findByHouseNo(int house_no){
 		ArrayList<OptVO> list = new ArrayList<OptVO>();
@@ -48,7 +83,7 @@ public class OptDAO {
 				o.setOpt_park(rs.getString("opt_park"));
 				o.setOpt_refrige(rs.getString("opt_refrige"));
 				o.setOpt_washer(rs.getString("opt_washer"));
-				o.setOt_micro(rs.getString("opt_micro"));
+				o.setOpt_micro(rs.getString("opt_micro"));
 				list.add(o);
 			}
 			

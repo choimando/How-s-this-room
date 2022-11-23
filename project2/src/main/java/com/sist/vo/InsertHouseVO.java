@@ -18,8 +18,8 @@ public class InsertHouseVO {
 	private String loc;
 	private String detail;
 	private String id;
-	private Date house_regdate;
-	private Date input_date;
+	private String house_regdate;
+	private String input_date;
 	private String state;
 	private String lat;
 	private String lng;
