@@ -26,7 +26,122 @@ public class HouseDAO {
 	private HouseDAO() {
 		
 	}
+	//house 삭제하는 메소드
+	public int deleteHouse(int house_no) {
+		int re = -1;
+		String sql = "delete house where house_no ="+ house_no;
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource) context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			re = stmt.executeUpdate(sql);
+		} catch (Exception e) {
+			System.out.println("예외발생 : "+ e.getMessage());
+		}finally {
+			if(stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return re;
+	}
 	
+	//house 상태 변경하는 메소드
+	public int updateHouse(int house_no) {
+		int re = -1;
+		String sql = "update house set state = 'N' where house_no ="+house_no;
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource) context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			re = stmt.executeUpdate(sql);
+		} catch (Exception e) {
+			System.out.println("예외발생 : "+ e.getMessage());
+		}finally {
+			if(stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return re;
+	}
+	//매물 작성자 찾는 메소드
+	public String findId(int house_no) {
+		String id =null;
+		String sql = "select id from house where house_no ="+house_no;
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource) context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				id = rs.getString("id");
+			}
+		} catch (Exception e) {
+			System.out.println("예외발생 : "+ e.getMessage());
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return id;
+	}
+	//house_no로 집 정보를 불러오는 메소드
 	public ArrayList<HouseVO> findByNo(int house_no){
 		ArrayList<HouseVO> list = new ArrayList<HouseVO>();
 		String sql = "select * from house where house_no ="+house_no;

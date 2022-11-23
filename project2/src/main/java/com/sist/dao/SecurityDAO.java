@@ -27,6 +27,42 @@ public class SecurityDAO {
 		return dao;
 	}
 	
+	//보안 삭제하는 메소드
+	public int deleteSecurity(int house_no) {
+		int re = -1;
+		String sql = "delete security where house_no =" + house_no;
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource) context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			re = stmt.executeUpdate(sql);
+		} catch (Exception e) {
+			System.out.println("예외발생 : "+ e.getMessage());
+		}finally {
+			if(stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return re;
+	}
+	
+	//해당하는 집의 보안정보를 찾아오는 메소드
 	public ArrayList<SecurityVO> findByNo(int house_no){
 		ArrayList<SecurityVO> list = new ArrayList<SecurityVO>();
 		String sql = "select * from security where house_no = "+house_no;
@@ -46,7 +82,7 @@ public class SecurityDAO {
 				s.setFirealarm(rs.getString("firealarm"));
 				s.setFrontdoor(rs.getString("frontdoor"));
 				s.setInterphone(rs.getString("interphone"));
-				s.setViedophone(rs.getString("videophone"));
+				s.setVideophone(rs.getString("videophone"));
 				list.add(s);
 			}
 		} catch (Exception e) {

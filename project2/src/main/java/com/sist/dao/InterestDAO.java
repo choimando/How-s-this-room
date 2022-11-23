@@ -1,48 +1,55 @@
 package com.sist.dao;
 
-
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.sist.vo.OptVO;
+import com.sist.vo.AlarmVO;
+import com.sist.vo.InterestVO;
 
-public class OptDAO {
-	private static OptDAO dao;
-	public static OptDAO getInstance() {
+public class InterestDAO {
+	public static InterestDAO dao;
+	
+	public static InterestDAO getInstance() {
 		if(dao == null) {
-			dao = new OptDAO();
+			dao = new InterestDAO();
 		}
 		return dao;
 	}
 	
-	private OptDAO() {		
-	}	
-	//옵션 삭제하는 메소드
-	public int deleteOPT(int house_no) {
+	private InterestDAO() {
+		
+	}
+	// 관심목록에 등록하는 메소드
+	public int insertInter(InterestVO i) {
 		int re = -1;
-		String sql = "delete opt where house_no =" + house_no;
+		String sql ="insert into interest(inter_no, inter_title, inter_img, id, house_id, house_no) values(seq_inter.nextval, ?, ?, ?, ?, ? )";
 		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		try {
 			Context context = new InitialContext();
 			DataSource ds = (DataSource) context.lookup("java:/comp/env/mydb");
 			conn = ds.getConnection();
-			stmt = conn.createStatement();
-			re = stmt.executeUpdate(sql);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, i.getInter_title());
+			pstmt.setString(2, i.getInter_img());
+			pstmt.setString(3, i.getId());
+			pstmt.setString(4, i.getHouse_id());
+			pstmt.setInt(5, i.getHouse_no());
+			re = pstmt.executeUpdate();
 		} catch (Exception e) {
-			System.out.println("예외발생 : "+ e.getMessage());
+			System.out.println("예외발생 : "+e.getMessage());
 		}finally {
-			if(stmt != null) {
+			if(pstmt != null) {
 				try {
-					stmt.close();
+					pstmt.close();
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -59,11 +66,10 @@ public class OptDAO {
 		}
 		return re;
 	}
-	
-	//해당하는 집번호의 옵션들을 불러오는 메소드
-	public ArrayList<OptVO> findByNo(int house_no){
-		ArrayList<OptVO> list = new ArrayList<OptVO>();
-		String sql = "select house_no, opt_park, opt_aircon, opt_refrige, opt_washer, opt_gas, opt_micro, opt_elevator, opt_builtin from opt where house_no = "+house_no;
+	// 해당 글을 관심목록에 등록한 사람의 아이디를 가져오는 메소드
+	public ArrayList<InterestVO> getId(int house_no){
+		ArrayList<InterestVO> list = new ArrayList<InterestVO>();
+		String sql = "select id, house_no from interest where house_no ="+house_no;
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -74,19 +80,11 @@ public class OptDAO {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
-				OptVO o = new OptVO();
-				o.setHouse_no(rs.getInt("house_no"));
-				o.setOpt_aircon(rs.getString("opt_aircon"));
-				o.setOpt_builtin(rs.getString("opt_builtin"));
-				o.setOpt_elevator(rs.getString("opt_elevator"));
-				o.setOpt_gas(rs.getString("opt_gas"));
-				o.setOpt_park(rs.getString("opt_park"));
-				o.setOpt_refrige(rs.getString("opt_refrige"));
-				o.setOpt_washer(rs.getString("opt_washer"));
-				o.setOpt_micro(rs.getString("opt_micro"));
-				list.add(o);
+				InterestVO i = new InterestVO();
+				i.setHouse_id(rs.getString("id"));
+				i.setHouse_no(rs.getInt("house_no"));
+				list.add(i);
 			}
-			
 		} catch (Exception e) {
 			System.out.println("예외발생 : "+ e.getMessage());
 		}finally {

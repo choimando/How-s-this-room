@@ -25,7 +25,42 @@ public class MgrDAO {
 	private MgrDAO() {
 		
 	}
+	// 관리비 삭제하는 메소드
+	public int deleteMgr(int house_no) {
+		int re = -1;
+		String sql = "delete mgr where house_no =" + house_no;
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			Context context = new InitialContext();
+			DataSource ds = (DataSource) context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			re = stmt.executeUpdate(sql);
+		} catch (Exception e) {
+			System.out.println("예외발생 : "+ e.getMessage());
+		}finally {
+			if(stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return re;
+	}
 	
+	//해당하는 집 번호의 관리비 항목을 찾아오는 메소드
 	public ArrayList<MgrVO> findByNo(int house_no){
 		ArrayList<MgrVO> list = new ArrayList<MgrVO>();
 		String sql = "select * from mgr where house_no = " + house_no;
