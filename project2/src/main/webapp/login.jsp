@@ -6,29 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	.nav{
-	height: 90px;
-	border-bottom: 1px solid gray;
-	display: flex;
-	align-items: center;
-	}
-	.sitename{
-		margin-left: 50px;
-		font-size: 30px;
-		font-family: 'Jalnan';
-		color: #F6323E;
-		
-	}
-	.menu{
-		display: flex;
-		margin-left: auto;
-		margin-right: 50px;
-	}
-	.menubar{
-		margin-right: 30px;
-		margin-left: 50px;
-		font-size: 15px;
-	}
+
 	
 	section{
 		margin: 0;
@@ -72,6 +50,8 @@
     	width: 1536px;
     }
 </style>
+<link rel="stylesheet" href="style.css">
+<script src="https://kit.fontawesome.com/def66b134a.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
 
@@ -79,16 +59,18 @@
 
 </head>
 <body>
-	<header class="nav">
-		<div class="sitename">이방어때</div>
-		<div class="menu"> 
-			<div class="menubar" href="#">지도</div>
-			<div class="menubar" href="#">관심목록</div>
-			<div class="menubar" href="#">방내놓기</div>
-			<div class="menubar" href="#">알림</div>
-			<div class="menubar" href="#">로그인/회원가입</div>
-		</div>
-	</header>
+	 <header id="main_header">
+      <h1><a id="main_link" href="main.jsp">이방어때</a></h1>
+      <nav id="topMenu">
+         <ul>
+            <li><a class="menu_link" id="houseListPage" href="loadHouse.do">지도</a></li>
+            <li><a class="menu_link" href="#">관심목록</a></li>
+            <li><a class="menu_link" href="#">방내놓기</a></li>
+            <li><a class="menu_link" href="#">알림</a></li>
+            <li><a class="menu_link" href="#">로그인/회원가입</a></li>
+         </ul>
+      </nav>
+   </header>
 	<section>
 		<div class="loginbox">
 		<form action="loginOK.do" method="post">
