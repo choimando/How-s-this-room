@@ -139,7 +139,14 @@
  		display: none;
  		background-color: white;
  	}
- 	#amout
+ 	.form-control{
+ 		margin-left:-8px;
+ 		margin-bottom: 30px;
+ 	}
+ 	
+ 	#amount{
+ 		font-size: 15px;
+ 	}
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <!-- 카카오맵 API -->
@@ -262,16 +269,16 @@
               	<div class="houseMgr">
               	<button id="houseMgr_select" type="button">관리비</button>
               	<div id="Mgrbox" class="Mgrbox" >
-              		<label for="amount">관리비:</label>
-              		<input type="text" id="amount" readonly style="border:0; color:#f6931f;" class="form-control">
+              		<label for="amount" class="form-control">관리비:</label>
+              		<input type="text" id="amount" readonly style="border:0; color:gray;" class="form-control">
               		<div id="slider-range"></div>
               	</div>
               	</div>
               	<div class="houseSize" >
               	<button id="houseSize_select">방크기</button>
               	<div id="SizeBox" class="SizeBox">
-              	<label for="size"></label>
-              	<input type="text" id="size" readonly style="border:0; color:#f6931f;" class="form-control">
+              	<label for="size" class="form-control">방크기</label>&nbsp;
+              	<input type="text" id="size" readonly style="border:0; color:gray;" class="form-control">
               	<div id="slider-size"></div>
               	</div>
               </div>

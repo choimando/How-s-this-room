@@ -73,8 +73,32 @@
 		width: 600px;
 		text-align: center;
 	}
+
 </style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	var loginId = sessionStorage.getItem("key");
+	if(loginId != null){
+		$("#loginId").html(loginId+"님 / 로그아웃");
+	}else{
+		$("#loginId").html("로그인/회원가입");
+	
+	}
+	$("#loginId").click(function(){
+		if($(this).html()== "로그인/회원가입" ){
+			document.location.href="login.do";
+		}else{
+			document.location.href="loginOut.jsp";
+		}
+		//document.location.href="loginOut.jsp";
+		
+	});
+	
+});
+</script>
 </head>
+
 <body>
 	<header id="main_header">
 		<h1>이방어때</h1>
@@ -84,7 +108,8 @@
 				<li><a class="menu_link" href="#">관심목록</a></li>
 				<li><a class="menu_link" href="#">방내놓기</a></li>
 				<li><a class="menu_link" href="#">알림</a></li>
-				<li><a class="menu_link" href="#">로그인/회원가입</a></li>
+				<li><a class="menu_link" href="#" id="loginId">
+				</a></li>
 			</ul>
 		</nav>
 	</header>

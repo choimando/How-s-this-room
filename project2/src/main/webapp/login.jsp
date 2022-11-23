@@ -67,7 +67,7 @@
             <li><a class="menu_link" href="#">관심목록</a></li>
             <li><a class="menu_link" href="#">방내놓기</a></li>
             <li><a class="menu_link" href="#">알림</a></li>
-            <li><a class="menu_link" href="#">로그인/회원가입</a></li>
+            <li><a class="menu_link" href="login.do">로그인/회원가입</a></li>
          </ul>
       </nav>
    </header>
