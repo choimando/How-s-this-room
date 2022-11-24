@@ -181,8 +181,8 @@
 	<section id="big_menu">
 		<h1 id="menu_bigtitle">방내놓기</h1>
 			<ul id="menu_btitle">
-			<li><a href="insertHouseTest.jsp" class="">방내놓기</a></li>
-			<li><a href="#" aria-current="page" class="active">내방관리</a></li>
+			<li><a href="insertHouse.jsp" class="">방내놓기</a></li>
+			<li><a href="insertHouse2.jsp" aria-current="page" class="active">내방관리</a></li>
 		</ul>
 	</section>
 	<section id="myroom_info">

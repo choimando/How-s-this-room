@@ -18,6 +18,6 @@ public class InsertHouseAction implements ProjectAction {
 		int house_no = dao.insertHouse(null);
 		request.setAttribute("house_no", house_no);
 		
-		return "insertHouseTest.jsp";
+		return "insertHouse.jsp";
 	}
 }
