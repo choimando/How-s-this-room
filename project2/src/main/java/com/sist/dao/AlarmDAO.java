@@ -2,7 +2,9 @@ package com.sist.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.naming.Context;
@@ -99,42 +101,109 @@ public class AlarmDAO {
 		return re;
 	}
 	
-	/*
-	public int insertAlarm_Sell() {
-		int re = -1;
-		String sql = "insert into alarm(al_no, al_content, al_type, id, house_no ) values(seq_al.nextval, '관심목록의 매물이 판매되었습니다.', 'inter', ?, ?)";
+	public ArrayList<AlarmVO> findByinter(String id){
+		ArrayList<AlarmVO> list = new ArrayList<AlarmVO>();
+		String sql = "select * from alarm where id = '" + id +"'and al_type = 'inter'";
 		Connection conn = null;
-		PreparedStatement pstmt = null;
+		Statement stmt = null;
+		ResultSet rs = null;
 		try {
 			Context context = new InitialContext();
-			DataSource ds = (DataSource) context.lookup("java:/comp/env/mydb");
+			DataSource ds =(DataSource) context.lookup("java:/comp/env/mydb");
 			conn = ds.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, a.getId());
-			pstmt.setInt(2, a.getHouse_no());
-			re = pstmt.executeUpdate();
-		} catch (Exception e) {
-			System.out.println("예외발생 : "+e.getMessage());
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				AlarmVO c = new AlarmVO();
+				c.setAl_no(rs.getInt("al_no"));
+				c.setAl_content(rs.getString("al_content"));
+				c.setAl_type(rs.getString("al_type"));
+				c.setId(rs.getString("id"));
+				c.setHouse_no(rs.getInt("house_no"));
+				list.add(c);
+			}
+			
+		}catch (Exception e) {
+			System.out.println("예외발생:"+e.getMessage());
 		}finally {
-			if(pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+			if(rs != null) { try{rs.close();}catch(Exception e) {} }
+			if(stmt != null) { try{stmt.close();}catch(Exception e) {} }
+			if(conn != null) { try{conn.close();}catch(Exception e) {} }
 		}
-		return re;
+		
+		return list;
 	}
-	*/
+	
+	
+	
+	
+
+	public ArrayList<AlarmVO> findByrecoment(String id){
+		ArrayList<AlarmVO> list = new ArrayList<AlarmVO>();
+		String sql = "select * from alarm where id = '" + id +"'and al_type = 'recoment'";
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			Context context = new InitialContext();
+			DataSource ds =(DataSource) context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				AlarmVO c = new AlarmVO();
+				c.setAl_no(rs.getInt("al_no"));
+				c.setAl_content(rs.getString("al_content"));
+				c.setAl_type(rs.getString("al_type"));
+				c.setId(rs.getString("id"));
+				c.setHouse_no(rs.getInt("house_no"));
+				list.add(c);
+			}
+			
+		}catch (Exception e) {
+			System.out.println("예외발생:"+e.getMessage());
+		}finally {
+			if(rs != null) { try{rs.close();}catch(Exception e) {} }
+			if(stmt != null) { try{stmt.close();}catch(Exception e) {} }
+			if(conn != null) { try{conn.close();}catch(Exception e) {} }
+		}
+		
+		return list;
+	}
+	
+	 
+	
+	public ArrayList<AlarmVO> findAll(String id){
+		ArrayList<AlarmVO> list = new ArrayList<AlarmVO>();
+		String sql = "select * from alarm where id = '" + id +"'";
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			Context context = new InitialContext();
+			DataSource ds =(DataSource) context.lookup("java:/comp/env/mydb");
+			conn = ds.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				AlarmVO b = new AlarmVO();
+				b.setAl_no(rs.getInt("al_no"));
+				b.setAl_content(rs.getString("al_content"));
+				b.setAl_type(rs.getString("al_type"));
+				b.setId(rs.getString("id"));
+				b.setHouse_no(rs.getInt("house_no"));
+				list.add(b);
+			}
+			
+		}catch (Exception e) {
+			System.out.println("예외발생:"+e.getMessage());
+		}finally {
+			if(rs != null) { try{rs.close();}catch(Exception e) {} }
+			if(stmt != null) { try{stmt.close();}catch(Exception e) {} }
+			if(conn != null) { try{conn.close();}catch(Exception e) {} }
+		}
+		
+		return list;
+	}
 }
 

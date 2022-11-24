@@ -50,6 +50,7 @@ public class ProjectController extends HttpServlet {
 				String cmd = (String) iter.next();
 				
 				String clsName = (String)prop.get(cmd);
+				
 				map.put(cmd, (ProjectAction)Class.forName(clsName).newInstance());
 			}
 			

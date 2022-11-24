@@ -8,8 +8,8 @@
 </head>
 <body>
 <script type="text/javascript">
-	var logout = sessionStorage.getItem("key");
-	sessionStorage.removeItem("key");
+	var logout = sessionStorage.getItem("id");
+	sessionStorage.removeItem("id");
 	
 	if(logout == null){
 		

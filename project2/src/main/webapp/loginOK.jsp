@@ -11,8 +11,8 @@
 	<c:if test="${re > 0 }">
 		<script type="text/javascript">
 			var key = "${id}";
-			sessionStorage.removeItem("key");
-			sessionStorage.setItem("key",key);
+			sessionStorage.removeItem("id");
+			sessionStorage.setItem("id",key);
 			alert("로그인 성공");
 			location.href = "main.jsp";
 			
