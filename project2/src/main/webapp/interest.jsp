@@ -473,6 +473,60 @@ svg:not(:root) {
 
 
 $(function(){
+	
+	$("#all").addClass("btn_active").css({"color":"#F6323E","font-weight":"700"});
+	
+	/* 스크롤, 헤더 변경 */
+	$(window).scroll(function(){
+		var scroll = $(window).scrollTop();
+		if(scroll > 1){
+			$("#forMain_header").css("background","white");
+			$("#main_link").css("color","#F6323E");
+			$(".menu_link").css("color","#F6323E");
+		}else{
+			$("#forMain_header").css("background","#F6323E");
+			$("#main_link").css("color","white");
+			$(".menu_link").css("color","white");
+		}
+	});
+	
+	$.ajax({
+		url:"RecommendHouse",
+		success:function(arr){
+			$.each(arr,function(){
+				var postDiv = $("<div></div>").addClass("post");
+				var img = $("<img>").addClass("slider-image").attr("src","images/"+this.img_fname);
+				var infoDiv = $("<div></div>").addClass("post-info");
+				var type = $("<span></span>").html(this.type);
+				var h4 = $("<h4></h4>").html(this.deal_type+" "+this.deposit+"/"+this.price);
+				$(infoDiv).append(type,h4);
+				$(postDiv).append(img,infoDiv).attr("house_no",this.house_no);
+				$(".post-wrapper").append(postDiv);
+				console.log(this.img_fname);
+			});	
+			
+			$('.post-wrapper').slick({
+				 slidesToShow: 3,
+				  slidesToScroll: 1,
+				  autoplay: true,
+				  autoplaySpeed: 2000,
+				  nextArrow:$('.next'),
+				  prevArrow:$('.prev')
+			});
+			
+			
+		}
+	});
+	
+	$(document).on("click",".post",function(){
+		$(this).css("cursor","pointer");
+		var house_no = $(this).attr("house_no");
+		console.log($(this).attr("house_no"));
+		location.href = "detailHouse.jsp?"+ house_no;
+	});
+	
+	
+	
 sessionStorage.setItem("house_no",1);
 	
 	
@@ -559,6 +613,23 @@ sessionStorage.setItem("house_no",1);
 </script>
 </head>
 <body>
+<div id="wrap">
+	<div id="forMain_header_wrap">
+		<header id="forMain_header">
+			<h1><a id="main_link" href="main.jsp">이방어때</a></h1>
+			<nav id="topMenu">
+				<ul>
+					<li><a class="menu_link" href="loadHouse.do">지도</a></li>
+					<li><a class="menu_link" href="#">관심목록</a></li>
+					<li><a class="menu_link" href="#">방내놓기</a></li>
+					<li><a class="menu_link" href="#">알림</a></li>
+					<li><a class="menu_link" href="#">로그인/회원가입</a></li>
+				</ul>
+			</nav>
+		</header>
+	</div>
+
+
 
 	<div id="root">
 		<div id ="content">

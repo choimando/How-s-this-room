@@ -50,6 +50,16 @@ html, body {
     overscroll-behavior-y: contain;
 }
 
+body::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: transparent;
+    opacity: 0;
+}
 header {
     display: block;
 }
@@ -100,6 +110,7 @@ a {
 
     
 }
+
 
 a:-webkit-any-link {
     color: -webkit-link;
@@ -202,10 +213,31 @@ li {
     
 }
 
+.fTwhuj {
+    width: 100%;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+}
+
 .bVcIUf > li + li > a {
     border-left: 0px;
 }
+.fTwhuj > div {
+    width: 1200px;
+    height: 100%;
+    margin: 0px auto;
+    padding: 0px 10px;
+}
 
+.location{
+
+	color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+
+
+}
 
 
 .gTKzxs > div {
@@ -224,15 +256,55 @@ li {
     margin-top: 50px;
 }
 
-.jIytUb {
+
+
+.kOcEUK {
+    width: 100%;
+    margin: 50px 0px 150px;
+    border-top: 1px solid rgb(34, 34, 34);
+}
+
+.jJQFeJ {
     display: flex;
+    height: 59px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+.jJQFeJ > div:first-child {
+    width: calc(100% - 135px);
+}
+
+
+
+.jJQFeJ > div {
+    display: flex;
+    color: rgb(34, 34, 34);
+    font-weight: 500;
+    font-size: 15px;
+    text-align: center;
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: center;
     justify-content: center;
-    height: 500px;
 }
 
+.fBxRvq {
+    border-bottom: 1px solid rgb(238, 238, 238);
+}
+
+.dwzXPe {
+    display: flex;
+    height: 59px;
+    padding-left: 30px;
+    font-size: 16px;
+    -webkit-box-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dwzXPe > div:first-child {
+    width: calc(100% - 135px);
+}
 
 
 
@@ -248,22 +320,24 @@ $(function(){
 	sessionStorage.setItem("id","lee");
 	
 	
-	var al_no = sessionStorage.getItem("id");
+	var id = sessionStorage.getItem("id");
 	//var obj = JSON.parse(al_no);
 	//console.log(obj);
 	
 	
 	
 	$.ajax({
-		url:"alarm_inter",
+		url:"alarm_all",
 		data:{id:id},
 		success:function(arr){
 			console.log(arr)
 	 	$.each(arr, function(){
 			 	var li = $("<li></li>");
+			 	var a = $("<a></a>").attr("house_no", this.house_no).addClass("location");
 				var p = $("<p></p>").html(this.al_content);
 				
-				$(li).append(p);
+				$(a).append(p);
+				$(li).append(a);
 				$(ul).append(li);
 				
 	 	});	
@@ -290,6 +364,24 @@ $(function(){
 	})
 	
 	
+	 $(function(){
+	 
+	 sessionStorage.setItem("house_no",1);
+		
+		
+	var house_no = sessionStorage.getItem("house_no");
+	 
+	 $(document).on("click",".location",function(){
+			var house_no = $(this).attr("house_no");
+			console.log(house_no);
+		//	location.href="detailHouse.do?house_no="+house_no;
+					
+		
+		}); 
+	
+	 })	
+	
+	
 });
 
 
@@ -308,7 +400,7 @@ $(function(){
 						<h1 class= "gcERMH">알림</h1>
 						<ul class ="bVcIUf">
 							<li>
-								<a  href="alram.jsp">전체 알림</a>
+								<a   href="alram.jsp">전체 알림</a>
 			
 							</li>
 							<li>
@@ -316,22 +408,43 @@ $(function(){
 								
 							</li>
 							<li>
-								<a  aria-cuttent="page" class="active" href="alram3.jsp">찜한 방 알림</a>
+								<a aria-cuttent="page" class="active" href="alram3.jsp">찜한 방 알림</a>
 								
 							</li>	
 						</ul>
 					</div>
 				
 				</header>
-				<div>
+				<div class="fTwhuj">
 					<div>
-						<div class="jIytUb">
-							<ul>
-								<li>
-									<p>자신의 매물이 찜한 방에 등록 되었습니다.</p>
-								<li>
-							</ul>
-						</div>
+	
+							<div class ="kOcEUK">
+								<div class= "jJQFeJ">
+									<div>제목</div>
+								</div>
+								<div class="fBxRvq">
+									<div>
+											<div>
+												<div class="dwzXPe">
+													<div>
+														자신의 매물이 찜한 방에 등록되었습니다.	
+													</div>
+											</div>
+										
+										</div>
+									
+									</div>
+								
+								</div>
+					
+								
+								</div>
+						
+								
+									
+							</div>
+						
+						
 					</div>
 				
 				</div>

@@ -493,7 +493,7 @@ $(function(){
 				var div = $("<div></div>").addClass("bmelun");
 				var Heart = $("<div></div>").addClass("dJVeaV");
 				var button = $("<button></button>").addClass("cAEqeS");
-				var a = $("<a></a>").addClass("hifzlw")/*.attr({
+				var a = $("<a></a>").attr("house_no", this.house_no).addClass("hifzlw")/*.attr({
 					href="#" ,target="_blank" , rel="noopener noreferrer"
 				})*/;
 				var room_img = $("<div></div>").addClass("jYtyLf");
@@ -566,6 +566,14 @@ $(function(){
 		
 	}); 
 	
+	 
+	 $(function(){
+	 
+	 sessionStorage.setItem("house_no",1);
+		
+		
+	var house_no = sessionStorage.getItem("house_no");
+	 
 	 $(document).on("click",".hifzlw",function(){
 			var house_no = $(this).attr("house_no");
 			console.log(house_no);
@@ -574,9 +582,10 @@ $(function(){
 		
 		}); 
 	
-	
+	 })	
 	
 });
+
 
 
 
@@ -605,7 +614,7 @@ $(function(){
 			<div class="bTjZki">
 				<div>
 					<ul class="kgYtxa">
-						<li class="jApvKd">
+					<!-- 	<li class="jApvKd">
 							<div class="bmelun">
 								<div class="dJVeaV">
 									<button class="cAEqeS"></button>
@@ -631,7 +640,7 @@ $(function(){
 							
 							</div>
 						
-						</li>
+						</li> -->
 						
 					
 					
