@@ -10,6 +10,7 @@
 
 
 body {
+	width: 1536px;
     -webkit-box-flex: 1;
     flex-grow: 1;
     font-size: 14px;
@@ -70,7 +71,6 @@ html, body {
     flex-direction: column;
     margin: 0px;
     padding: 0px;
-    width: 100%;
     height: 100%;
     overscroll-behavior-y: contain;
 }
@@ -492,7 +492,7 @@ sessionStorage.setItem("house_no",1);
 				var div = $("<div></div>").addClass("bmelun");
 				//var Heart = $("<div></div>").addClass("dJVeaV");
 				//var button = $("<button></button>").addClass("cAEqeS");
-				var a = $("<a></a>").addClass("hifzlw")/*.attr({
+				var a = $("<a></a>").attr("house_no", this.house_no).addClass("hifzlw")/*.attr({
 					href="#" ,target="_blank" , rel="noopener noreferrer"
 				})*/;
 				var room_img = $("<div></div>").addClass("jYtyLf");
@@ -516,19 +516,7 @@ sessionStorage.setItem("house_no",1);
 				});
 				var room_end2= $("<div></div>").addClass("iYUvsQ");
 				
-				/* $(Heart).append(button);
-				$(div).append(Heart);
-				$(room_img2).append(room_end);
-				$(room_img2).append(img);
-				$(room_img).append(room_img2);
-				$(a).append(room_img);
-				$(room_title).append(room_end2);
-				$(room_title).append(room_title2);
-				$(a).append(room_title);
-				$(div).append(a);
-				$(li).append(div);
-				$(".kgYtxa").append(li);
-				 */
+		
 			 	$(li).append(div);
 				//$(div).append(Heart);
 				//$(Heart).append(button);
@@ -590,7 +578,7 @@ sessionStorage.setItem("house_no",1);
 			<div class="bTjZki">
 				<div>
 					<ul class="kgYtxa">
-						<li class="jApvKd">
+					<!-- 	<li class="jApvKd">
 							<div class="bmelun">
 								<div class="dJVeaV">
 									<button class="cAEqeS"></button>
@@ -616,7 +604,7 @@ sessionStorage.setItem("house_no",1);
 							
 							</div>
 						
-						</li>
+						</li> -->
 						
 					
 					
