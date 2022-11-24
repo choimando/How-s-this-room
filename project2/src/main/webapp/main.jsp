@@ -131,10 +131,11 @@
 	</main>
 	<footer>
 	 	<p id="footer_p">
+	 		<span id="footer_h4"> 이방어때 </span><br>
 	 		<span> Semi-final Team </span><br>
 	 		<span> 주소 : 서울시 마포구 서교동 </span><br>
-<!-- 	 		<span> 고객센터 : 02-0808-0808 </span><br>
- -->	 	</p>
+			<span> 고객센터 : 02-0808-0808 </span><br>
+		</p>
 	</footer>
 </body>
 </html>

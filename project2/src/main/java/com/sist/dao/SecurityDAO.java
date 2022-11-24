@@ -42,7 +42,7 @@ public class SecurityDAO {
 				s.setFirealarm(rs.getString("firealarm"));
 				s.setFrontdoor(rs.getString("frontdoor"));
 				s.setInterphone(rs.getString("interphone"));
-				s.setViedophone(rs.getString("videophone"));
+				s.setVideophone(rs.getString("videophone"));
 				list.add(s);
 			}
 		} catch (Exception e) {

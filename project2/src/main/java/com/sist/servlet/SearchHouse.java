@@ -34,9 +34,15 @@ public class SearchHouse extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String searchWord = request.getParameter("searchWord");
+		String houseType = request.getParameter("houseType");
+		String dealType = request.getParameter("dealType");
+		int price = Integer.parseInt(request.getParameter("price"));
 		System.out.println(searchWord);
+		System.out.println(houseType);
+		System.out.println(dealType);
+		System.out.println(price);
 		HouseDAO dao = HouseDAO.getInstance();
-		ArrayList<RecommendVO> list = dao.searchHouse(searchWord);
+		ArrayList<RecommendVO> list = dao.searchHouse(searchWord,houseType,dealType,price);
 		Gson gson = new Gson();
 		String str = gson.toJson(list);
 		response.setContentType("application/json;charset=utf-8");

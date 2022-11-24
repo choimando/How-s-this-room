@@ -17,9 +17,26 @@
 <script src="https://kit.fontawesome.com/def66b134a.js" crossorigin="anonymous"></script>
 <!-- 화살표, 검색 버튼 아이콘 제공 태그 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 <script type="text/javascript">
 	$(function(){
+		// 가격 div 클릭했을 때, rangeSlider 보이게 안보이게
+		$("#price").click(function(){
+			$("#rangeSlider").toggle(function(){
+				$("#rangeSlider").css("visibility","visible");
+			});
+		});
+		
+		// rangeSlider
+		var slider = document.getElementById("myRange");
+        var output = document.getElementById("value");
+        output.innerHTML = slider.value;
+        var sliderValue;
+        slider.oninput = function() {
+            output.innerHTML = this.value;
+            sliderValue = this.value;
+        }
+		
+		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
 	        center: new kakao.maps.LatLng(37.5553, 126.9215), // 지도의 중심좌표 - 홍대입구역
@@ -82,10 +99,21 @@
 		$("#map_searchBtn").click(function(e){
 			var searchWord = $("#house_search").val(); 
 			console.log(searchWord);
-					
+			var houseType_select = $("#houseType_select option:checked").text();
+			var dealType_select = $("#dealType_select option:checked").text();
+			console.log(houseType_select);
+			console.log(dealType_select);
+			$("#rangeSlider").css("visibility","hidden");
+			$("#price").html(sliderValue+"만원 이하");
+			var price = sliderValue;
+			
 			$.ajax({
 				url:"SearchHouse",
-				data:{searchWord:searchWord},
+				data:{searchWord:searchWord,
+					houseType:houseType_select,
+					dealType:dealType_select,
+					price:price
+					},
 				success:function(arr){
 					$(".list").css("display","none");
 					
@@ -155,6 +183,33 @@
 						<input type="search" id="house_search" placeholder="지역명을 입력해주세요">
 					</form>
 					<button type="submit" id="map_searchBtn" class="btn red rounded">검색</button>
+				</div>
+				<div class="filter_wrap">
+					<div class="select">
+				      <select id="houseType_select">
+				        <option value="원룸">원룸</option>
+				        <option value="투룸">투룸</option>
+				        <option value="오피스텔">오피스텔</option>
+				      </select>
+				      <div class="select__arrow">▼</div>
+				    </div>
+					<div class="select">
+				      <select id="dealType_select">
+				        <option value="월세">월세</option>
+				        <option value="전세">전세</option>
+				      </select>
+				      <div class="select__arrow">▼</div>
+				    </div>
+				    <div class="select">
+				    	<div id="price">가격</div>
+				    	<div class="select__arrow">▼</div>
+				    </div>
+				    <div id="rangeSlider">
+				    	<div class="slidecontainer">
+					        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+					        <p id="slider_value"><span id="value"></span>만원 이하</p>
+					    </div>
+				    </div>
 				</div>
 			</div>
 			
