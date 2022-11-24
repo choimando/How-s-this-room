@@ -104,7 +104,7 @@ private static InsertHouseDAO dao;
 			
 			return house_no;
 		}
-	
+	//house테이블 정보 입력하는 메소드
 	public int insertHouse(InsertHouseVO i) {
 		int re = -1;
 		String sql = "insert into house (house_no,house_name,deposit,type,deal_type,floor,price,area,aspect,loc,detail,id,house_regdate,input_date,lat,lng,mgr) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -143,7 +143,7 @@ private static InsertHouseDAO dao;
 		}
 		return re;
 	}
-	
+	//모든 house정보를 나타내는 메소드(필요없음)
 	public ArrayList<InsertHouseVO> findAll(){
 		ArrayList<InsertHouseVO> list = new ArrayList<InsertHouseVO>();
 		String sql = "select * from house";

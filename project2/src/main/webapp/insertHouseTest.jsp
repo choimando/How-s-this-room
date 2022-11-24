@@ -11,7 +11,6 @@
 <script type="text/javascript">
 	$(function(){
 			 var geocoder = new kakao.maps.services.Geocoder();
-
 			 $("#address").click(function(){
 			     new daum.Postcode({
 			         oncomplete: function(data) {
@@ -24,6 +23,7 @@
 			     }).open()
 			 });
 			//lat,lng 값
+			
 			 var callback = function(result, status) {
 			 	if (status === kakao.maps.services.Status.OK) {
 			 		var lat = $("input[name=lng]").val(result[0].x);
@@ -37,26 +37,40 @@
 		sessionStorage.setItem("id","후후");
 		var id=sessionStorage.getItem("id");
 		$("#id").val(id);
+		//이미지 파일이름 불러오기
+		$('#btn_upload').click(function(){
+            
+            var files=$('input:file[name="img_fname"]')[0].files;
+            
+            for(var i= 0; i<files.length; i++){
+                alert('img_fname :'+files[i].name);
+            }
+            
+        });
+
 		
+		//var str = $("#insert_all").serializeArray();
 		$("#btnRegister").click(function(){
-			var str = $('#insert_all').serializeArray();//모든 input값 
-			console.log(str);
+			var form = new FormData(document.getElementById('insert_all'));
 			$.ajax({
-				url:"insertHouse",
-				data:str,
-				success:function(re){
-					if(re=1){
-						alert("house table 성공");
-						//location.href="loadHouseAction.do?house_no="+house_no;
-						//location.href="insertHouseOK.do?house_no="+house_no;
-						//입력한 no out.print해서 값 나오는지 확인하고
-					}
-					else{
-						alert("매물 등록(house table)실패");
-					}
+			url : "insertHouse",
+			type : "post",
+			processData: false,
+			contentType: false,
+			data : form,
+			dataType : "json",
+			success : function(data) {
+				if(data>=1){
+					console.log(form);
+					alert("house table 성공");
+					//location.href="loadHouseAction.do?house_no="+house_no;
+					//location.href="insertHouseOK.do?house_no="+house_no;
+					//입력한 no out.print해서 값 나오는지 확인하고
 				}
+				else{
+					alert("매물 등록(house table)실패");}}});
+
 			});
-		});
 	});	
 </script>
 <style type="text/css">
@@ -207,7 +221,7 @@
 		</section>
 	
 	<div id="AllWrap">
-		<form id="insert_all" class="insert_all" method="post" enctype="multipart/form-data">
+		<form  id="insert_all" class="insert_all" method="post" enctype="multipart/form-data">
 			
 			<section id="myroom_info">
 					<div id="myroom_info_div">
@@ -246,8 +260,8 @@
 						<h2>기본 정보</h2>
 						<tr>
 							<td><input type="number" name="deposit" class='input_chk' placeholder="보증금을 입력해주세요." value="" />&nbsp;&nbsp;만원 /</td>
-							<td><input type="number" name="price" class='input_chk' placeholder="가격을 입력해주세요." value="" /></td>
-							<td><label>면적&nbsp;</label><input type="number" class='input_chk' name="area" id="insert_area"><span>평</span></label></td>
+							<td><input type="number" name="price" class='input_chk' placeholder="가격을 입력해주세요." value="" />&nbsp;&nbsp;만원  /   </td>
+							<td><label>면적&nbsp;</label><input type="number" class='input_chk' name="area" id="insert_area"><span>평   /</span></label></td>
 							 <td>
 							 	<select id="insert_floor" name="floor" class='input_chk'>
 									<option>해당층수선택</option>
@@ -398,17 +412,22 @@
 			
 			<section id="insert_img">
 				<div id="div_input_info">
+				<h2>이미지</h2>
 				이미지번호 : <input type ="number" id="img" name="img_no" value="" class='input_chk'>
-				이미지사진 : <input type ="file" id="" name="img_fname" value="" class='input_chk'>
+				이미지사진 : <input type ="file" id="" name="img_fname" value="" class='input_chk' multiple/>
+				
+				
+				<input type="button" id="btn_upload" value="show" />
 				</div>
 			</section>
+			
 			<div id="div_input_info">
 			위에 추가안한 요소:<br>
 			ID:<input type="hidden" id="id" name='id' class="input_chk" value=""><br>
-			등록일:<input type="date" id="house_regdate" name='house_regdate' class="input_chk" value=""/><br>
+			등록일:<input type="date" id="house_regdate" name='house_regdate' class="input_chk" value=""/>
 			</div>
-			<button id="btnRegister">등록하기</button><br>
 		</form>
+			<button id="btnRegister">등록하기</button><br>
 		
 	</div>
 

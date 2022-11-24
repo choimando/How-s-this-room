@@ -1,9 +1,12 @@
 package com.sist.servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.websocket.Transformation;
 import java.text.ParseException;
 
+import com.oreilly.servlet.MultipartFilter;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.sist.dao.ImgDAO;
@@ -48,8 +52,11 @@ public class InsertHouseServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("text/plain;charset=utf-8");
+		System.out.println("insertHouse 동작함.");
 		
 		String path = request.getRealPath("data");
+		System.out.println("path:"+path);
+		
 		MultipartRequest multi = new MultipartRequest(
 				request,
 				path, 
@@ -62,50 +69,58 @@ public class InsertHouseServlet extends HttpServlet {
 		InsertHouseDAO dao= InsertHouseDAO.getInstance();
 		
 		int house_no = dao.getNextNo();
-		String house_name = request.getParameter("house_name");
-		int deposit = Integer.parseInt(request.getParameter("deposit"));
-		String type = request.getParameter("type");
-		String deal_type = request.getParameter("deal_type");
+		String house_name = multi.getParameter("house_name");
+		
+		System.out.println("house_name:"+house_name);
+		int deposit = Integer.parseInt(multi.getParameter("deposit"));
+		String type = multi.getParameter("type");
+		String deal_type = multi.getParameter("deal_type");
 		//int hit = Integer.parseInt(request.getParameter("hit"));
-		int floor = Integer.parseInt(request.getParameter("floor"));
-		int price = Integer.parseInt(request.getParameter("price"));
-		int area = Integer.parseInt(request.getParameter("area"));
-		String aspect = request.getParameter("aspect");
-		String loc = request.getParameter("loc");
-		String detail = request.getParameter("detail");
-		String id = request.getParameter("id");
-		String house_regdate = request.getParameter("house_regdate");
-		String input_date = request.getParameter("input_date");
+		int floor = Integer.parseInt(multi.getParameter("floor"));
+		int price = Integer.parseInt(multi.getParameter("price"));
+		int area = Integer.parseInt(multi.getParameter("area"));
+		String aspect = multi.getParameter("aspect");
+		String loc = multi.getParameter("loc");
+		String detail = multi.getParameter("detail");
+		String id = multi.getParameter("id");
+		String house_regdate = multi.getParameter("house_regdate");
+		String input_date = multi.getParameter("input_date");
 		
 		//String state = request.getParameter("state");
-		String lat = request.getParameter("lat");
-		String lng = request.getParameter("lng");
-		int mgr = Integer.parseInt(request.getParameter("mgr"));
+		String lat = multi.getParameter("lat");
+		String lng = multi.getParameter("lng");
+		int mgr = Integer.parseInt(multi.getParameter("mgr"));
 		
 		
-		String mgr_elec = request.getParameter("mgr_elec");
-		String mgr_gas = request.getParameter("mgr_gas");
-		String mgr_internet = request.getParameter("mgr_internet");
-		String mgr_park = request.getParameter("mgr_park");
-		String mgr_water = request.getParameter("mgr_water");
+		String mgr_elec = multi.getParameter("mgr_elec");
+		String mgr_gas = multi.getParameter("mgr_gas");
+		String mgr_internet = multi.getParameter("mgr_internet");
+		String mgr_park = multi.getParameter("mgr_park");
+		String mgr_water = multi.getParameter("mgr_water");
 		
-		String opt_park = request.getParameter("opt_park");
-		String opt_aircon = request.getParameter("opt_aircon");
-		String opt_refrige = request.getParameter("opt_refrige");
-		String opt_washer = request.getParameter("opt_washer");
-		String opt_gas = request.getParameter("opt_gas");
-		String opt_micro = request.getParameter("opt_micro");
-		String opt_elevator = request.getParameter("opt_elevator");
-		String opt_builtin = request.getParameter("opt_builtin");
+		String opt_park = multi.getParameter("opt_park");
+		String opt_aircon = multi.getParameter("opt_aircon");
+		String opt_refrige = multi.getParameter("opt_refrige");
+		String opt_washer = multi.getParameter("opt_washer");
+		String opt_gas = multi.getParameter("opt_gas");
+		String opt_micro = multi.getParameter("opt_micro");
+		String opt_elevator = multi.getParameter("opt_elevator");
+		String opt_builtin = multi.getParameter("opt_builtin");
 				
-		String cctv = request.getParameter("cctv");	
-		String videophone = request.getParameter("videophone");	
-		String interphone = request.getParameter("interphone");	
-		String frontdoor = request.getParameter("frontdoor");	
-		String firealarm = request.getParameter("firealarm");	
+		String cctv = multi.getParameter("cctv");	
+		String videophone = multi.getParameter("videophone");	
+		String interphone = multi.getParameter("interphone");	
+		String frontdoor = multi.getParameter("frontdoor");	
+		String firealarm = multi.getParameter("firealarm");	
 		
-		int img_no = Integer.parseInt(request.getParameter("img_no"));
-		String img_fname = request.getParameter("img_fname");
+		int img_no = Integer.parseInt(multi.getParameter("img_no"));
+		
+		
+
+		File file = multi.getFile("img_fname");	
+		String img_fname = file.getName();
+		System.out.println("파일명:"+img_fname);
+		
 		InsertHouseVO i = new InsertHouseVO();
 		MgrVO m = new MgrVO();
 		OptVO o = new OptVO();
@@ -162,9 +177,6 @@ public class InsertHouseServlet extends HttpServlet {
 		i.setLng(lng);
 		i.setMgr(mgr);
 		
-		
-		
-		
 		MgrDAO dao_mgr = MgrDAO.getInstance();
 		OptDAO dao_opt = OptDAO.getInstance();
 		SecurityDAO dao_sec = SecurityDAO.getInstance();
@@ -190,7 +202,7 @@ public class InsertHouseServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/plain;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
 		doGet(request, response);
 	}
 

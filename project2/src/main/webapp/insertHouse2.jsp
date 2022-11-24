@@ -67,6 +67,7 @@
     font-family: NanumGothic, -apple-system, sans-serif;
 }
 
+	
 	 #AllWrap{
 		margin :0 auto;
 		}
@@ -111,9 +112,42 @@
 	}
 	#menu_btitle > li > a.active{
 		color: rgb(255, 255, 255);
-	    background-color: #F6323E;
+	    background-color: #000000;
 	    border: 0px;
 	}
+	input[type="radio"]{
+		display:none;
+	}
+	input[type="checkbox"]{
+		display:none;
+	}
+	input[type="radio"]+span{
+		display: inline-block;
+        padding: 10px 10px;
+        border: 1px solid #dfdfdf;
+        background-color: #ffffff;
+        text-align: center;
+        cursor: pointer;
+	}
+	
+	input[type="checkbox"]+span{
+		display: inline-block;
+        padding: 10px 10px;
+        border: 1px solid #dfdfdf;
+        background-color: #ffffff;
+        text-align: center;
+        cursor: pointer;
+	}
+	  input[type="radio"]:checked + span {
+        background-color: #000000;
+        color: #ffffff;
+        
+        }
+        input[type="checkbox"]:checked + span {
+        background-color: #cccccc;
+        color: #333333;
+        
+        }
 	#btnRegister{
 		margin-bottom: 50px;
 	}
