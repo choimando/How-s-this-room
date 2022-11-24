@@ -415,12 +415,10 @@
 				<h2>이미지</h2>
 				이미지번호 : <input type ="number" id="img" name="img_no" value="" class='input_chk'>
 				이미지사진 : <input type ="file" id="" name="img_fname" value="" class='input_chk' multiple/>
-				
-				
+			
 				<input type="hidden" id="btn_upload" value="show" />
 				</div>
 			</section>
-			
 			<div id="div_input_info">
 			<h2>등록일</h2>
 			<input type="hidden" id="id" name='id' class="input_chk" value=""><br>
