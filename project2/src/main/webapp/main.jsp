@@ -70,12 +70,12 @@
 				
 			}
 		});
-		
+		//매물 클릭시 해당 매물 상세페이지 이동
 		$(document).on("click",".post",function(){
 			$(this).css("cursor","pointer");
 			var house_no = $(this).attr("house_no");
 			console.log($(this).attr("house_no"));
-			location.href = "detailHouse.do?house_no="+house_no;
+			location.href = "detailHouse.do?house_no="+ house_no;
 		});
 		
 		var loginId = sessionStorage.getItem("id");
@@ -94,7 +94,6 @@
 			//document.location.href="loginOut.jsp";
 			
 		});
-		
 	});
 </script>
 </head>
@@ -106,9 +105,9 @@
 			<nav id="topMenu">
 				<ul>
 					<li><a class="menu_link" href="loadHouse.do">지도</a></li>
-					<li><a class="menu_link" href="#">관심목록</a></li>
-					<li><a class="menu_link" href="#">방내놓기</a></li>
-					<li><a class="menu_link" href="#">알림</a></li>
+					<li><a class="menu_link" href="interest.jsp">관심목록</a></li>
+					<li><a class="menu_link" href="insertHouse.do">방내놓기</a></li>
+					<li><a class="menu_link" href="alarm.jsp">알림</a></li>
 					<li><a class="menu_link" href="#" id="loginId"></a></li>
 				</ul>
 			</nav>
@@ -149,10 +148,11 @@
 	</main>
 	<footer>
 	 	<p id="footer_p">
+	 		<span id="footer_h4"> 이방어때 </span><br>
 	 		<span> Semi-final Team </span><br>
 	 		<span> 주소 : 서울시 마포구 서교동 </span><br>
-<!-- 	 		<span> 고객센터 : 02-0808-0808 </span><br>
- -->	 	</p>
+			<span> 고객센터 : 02-0808-0808 </span><br>
+		</p>
 	</footer>
 </body>
 </html>

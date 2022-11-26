@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"/>
 <title>Insert title here</title>
+<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style type="text/css">
 * {
@@ -45,7 +46,7 @@ footer {
 
 #main_header h1 {
 	color: #F6323E;
-	font-family: 'Jalnan';
+	font-family: '여기어때 잘난체 OTF';
 	margin-left: 50px;
 }
 
@@ -263,6 +264,23 @@ ul{
 
 <script type="text/javascript">
 	$(function() {
+		
+		var loginId = sessionStorage.getItem("id");
+		if(loginId != null){
+			$("#loginId").html(loginId+"님 / 로그아웃");
+		}else{
+			$("#loginId").html("로그인/회원가입");
+		
+		}
+		$("#loginId").click(function(){
+			if($(this).html()== "로그인/회원가입" ){
+				document.location.href="login.do";
+			}else{
+				document.location.href="loginOut.jsp";
+			}
+			//document.location.href="loginOut.jsp";
+			
+		});
 			
 		var house_id = $("#house_id").val();
 		var lat = $("#lat").val();
@@ -677,14 +695,14 @@ ul{
 		<input type="hidden" id="house_no2" name="house_no2">
 	</form>
 	<header id="main_header">
-		<h1>이방어때</h1>
+		<h1><a id="main_link" href="main.jsp">이방어때</a></h1>
 		<nav id="topMenu">
 			<ul>
-				<li><a class="menu_link" href="#">지도</a></li>
-				<li><a class="menu_link" href="#">관심목록</a></li>
-				<li><a class="menu_link" href="#">방내놓기</a></li>
-				<li><a class="menu_link" href="#">알림</a></li>
-				<li><a class="menu_link" href="#">로그인/회원가입</a></li>
+				<li><a class="menu_link" href="loadHouse.do">지도</a></li>
+				<li><a class="menu_link" href="interest.jsp">관심목록</a></li>
+				<li><a class="menu_link" href="insertHouse.do">방내놓기</a></li>
+				<li><a class="menu_link" href="alarm.jsp">알림</a></li>
+				<li><a class="menu_link" href="#" id="loginId"></a></li>
 			</ul>
 		</nav>
 	</header>
@@ -921,6 +939,6 @@ ul{
 			</div>
 		</div>
 	</article>
-	<footer id="footer"> </footer>
+	
 </body>
 </html>
