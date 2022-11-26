@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	#house_info div{
+		float: left;
+	}
+</style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//에이작 통신 4번 하기~
+		//house 에이작
+		//opt 에이작
+		//sequery 에이작
+		//mgr 에이작
+		
+		//아니면 action에서 4개 한거 상태유지해서 가져오기
+	});
+</script>
+</head>
+<body>
+	<header></header>
+	
+	<nav></nav>
+	
+	<article>
+		 <!-- 첫 화면에 보이는 컨테이너 -->
+		<div id="main_container">
+			<div id="title">
+				<a href="">돌아가기</a>
+				<h1 id="house_name">홍대 입구역 가까운 집</h1>
+				<div id="addr">서울시 마포구 서교동</div>
+				<hr>
+			</div>
+			<div id="house_img"></div>
+			<div id="house_info">
+				<div id="price_info">
+					<table width = "250px">
+						<tr>
+							<td colspan="2">가격정보</td>
+						</tr>
+						<tr>
+							<td id="deal_type">월세</td>
+							<td id="house_price">60만원</td>
+						</tr>
+						<tr>
+							<td>관리비</td>
+							<td id="mgr">30만원</td>
+						</tr>
+						<tr>
+							<td>주차 가능여부</td>
+							<td id="park">가능</td>
+						</tr>
+						<tr>
+							<td>한 달 예상금액</td>
+							<td id="month_price">100만원</td>
+						</tr>
+					</table>
+				</div>
+				<div id="detail_info">
+					<table width="250px">
+						<tr>
+							<td colspan="2">상세정보</td>
+						</tr>
+						<tr>
+							<td>방 형태</td>
+							<td id="house_type">원룸</td>
+						</tr>
+						<tr>
+							<td>층수</td>
+							<td id="floor">3층</td>
+						</tr>
+						<tr>
+							<td>방향</td>
+							<td id="aspect">남방향</td>
+						</tr>
+						<tr>
+							<td>보증금</td>
+							<td id="deposit">2000만원</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		 <!-- 더보기 버튼 누를 때 화면에 보이는 컨테이너 -->
+		<div id="add_container"></div>
+	</article>
+</body>
+</html>
