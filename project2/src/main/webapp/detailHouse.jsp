@@ -16,21 +16,17 @@
 body{
 	width: 1536px;
 }
-
 span {
 	margin-top: 40px;
 }
-
 footer {
 	position: absolute;
 	bottom: 0px;
 	left: 50%;
 }
-
 #house_info {
 	display: flex;
 }
-
 #main_header {
 	/* position:fixed; */
 	height: 80px;
@@ -42,18 +38,15 @@ footer {
 	margin-bottom: 10px;
 	
 }
-
 #main_header h1 {
 	color: #F6323E;
 	font-family: 'Jalnan';
 	margin-left: 50px;
 }
-
 #topMenu {
 	height: 30px;
 	width: 800px;
 }
-
 #topMenu ul li {
 	list-style: none;
 	float: left;
@@ -62,38 +55,32 @@ footer {
 	line-height: 30px;
 	vertical-align: middle;
 }
-
 #topMenu .menu_link {
 	text-decoration: none;
 	display: block;
 	width: 150px;
 	color: gray;
 }
-
 #topMenu .menu_link:hover {
 	color: #F6323E;
 	font-weight: bold;
 }
-
 #main_body {
 	background: #F6323E;
 	height: 500px;
 	width: 100%;
 	padding-top: 100px;
 }
-
 #btn_plus {
 	position: absolute;
 	left: 50%;
 }
-
 .opt_icon {
 	width: 50px;
 	height: 50px;
 	margin-right: 10px;
 	margin-top: 15px;
 }
-
 #mini_box {
 	border: 1px solid rgb(223, 223, 223);
 	position: relative;
@@ -104,65 +91,51 @@ footer {
 	box-shadow: rgb(0 0 0 / 10%) 0px 10px 20px;
 	border-radius: 2px;
 }
-
 article {
 	width: 80%;
 	margin: auto;
 }
-
 #house_img {
 	padding: 30px 0 30px 0;
 	display: inline-block;
 	position: relative;
 }
-
-
 #house_name {
 	padding: 15px 0;
 	font-size: 2em;
 }
-
 #house_info {
 	padding: 0 0 30px 0;
 }
-
 table {
 	height: 300px;
 }
-
 #map {
 	margin-top: 30px;
 }
-
 #house_loc {
 	margin-top: 10px;
 }
-
 #container {
 	height: 900px;
 	overflow: hidden;
 }
-
 #opt {
 	margin-top: 40px;
 }
-
 #detail {
 	margin-top: 30px;
 	width: 70%;
 }
-
 #house_detail {
 	margin-top: 20px;
 	border: 1px solid black;
 	width: 66.4%;
 }
-
 #recoment_box {
 	margin-top: 30px;
 	width: 70%;
 }
-
 #recoment {
 	
 }
@@ -175,43 +148,31 @@ button{
 	height: 50px;
 	opacity: 50%;
 }
-
-
 .modal {
   position: absolute;
   top: 0;
   left: 0;
-
   width: 100%;
   height: 100%;
-
   display: none;
-
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 100;
 }
-
 .modal.show {
   display: block;
 }
-
 .modal_body {
   position: absolute;
   top: 50%;
   left: 50%;
-
   width: 1200px;
   height: 600px;
-
   padding: 40px;
-
   text-align: center;
-
   background-color: #ffffff;
   
   border-radius: 10px;
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-
   transform: translateX(-50%) translateY(-50%);
 }
 ul{
@@ -241,7 +202,6 @@ ul{
       color: gray;
       cursor: potiner;
    }
-
 .post-slider .prev{
       position:absolute;
       top:50%;
@@ -383,7 +343,6 @@ ul{
 			level : 1
 		// 지도의 확대 레벨
 		};
-
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption);
 		
@@ -502,19 +461,15 @@ ul{
 		 const body = document.querySelector('body');
 	      const modal = document.querySelector('.modal');
 	      const btnOpenPopup = document.querySelector('.btn-open-popup');
-
 	      btnOpenPopup.addEventListener('click', () => {
 	        modal.classList.toggle('show');
-
 	        if (modal.classList.contains('show')) {
 	          body.style.overflow = 'hidden';
 	        }
 	      });
-
 	      modal.addEventListener('click', (event) => {
 	        if (event.target === modal) {
 	          modal.classList.toggle('show');
-
 	          if (!modal.classList.contains('show')) {
 	            body.style.overflow = 'auto';
 	          }
