@@ -7,7 +7,7 @@
 <title>이방어때</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <!-- css 파일 -->
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?ver=10">
 <!-- css 파일 -->
 <!-- 화살표, 검색 버튼 아이콘 제공 태그 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -75,7 +75,7 @@
 			$(this).css("cursor","pointer");
 			var house_no = $(this).attr("house_no");
 			console.log($(this).attr("house_no"));
-			location.href = "detailHouse.do?house_no="+house_no;
+			location.href = "detailHouse.jsp?"+ house_no;
 		});
 		
 		var loginId = sessionStorage.getItem("id");
@@ -94,7 +94,6 @@
 			//document.location.href="loginOut.jsp";
 			
 		});
-		
 	});
 </script>
 </head>
@@ -107,9 +106,9 @@
 				<ul>
 					<li><a class="menu_link" href="loadHouse.do">지도</a></li>
 					<li><a class="menu_link" href="#">관심목록</a></li>
-					<li><a class="menu_link" href="#">방내놓기</a></li>
+					<li><a class="menu_link" href="insertHouse.do">방내놓기</a></li>
 					<li><a class="menu_link" href="#">알림</a></li>
-					<li><a class="menu_link" href="#" id="loginId">로그인/회원가입</a></li>
+					<li><a class="menu_link" href="#" id="loginId"></a></li>
 				</ul>
 			</nav>
 		</header>
@@ -149,10 +148,11 @@
 	</main>
 	<footer>
 	 	<p id="footer_p">
+	 		<span id="footer_h4"> 이방어때 </span><br>
 	 		<span> Semi-final Team </span><br>
 	 		<span> 주소 : 서울시 마포구 서교동 </span><br>
-<!-- 	 		<span> 고객센터 : 02-0808-0808 </span><br>
- -->	 	</p>
+			<span> 고객센터 : 02-0808-0808 </span><br>
+		</p>
 	</footer>
 </body>
 </html>

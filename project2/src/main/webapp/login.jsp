@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="style.css?ver=10">
 <style type="text/css">
 	
 	section{
@@ -49,7 +50,7 @@
     	width: 1536px;
     }
 </style>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?ver=1">
 <script src="https://kit.fontawesome.com/def66b134a.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script type="text/javascript">
@@ -63,7 +64,7 @@
          <ul>
             <li><a class="menu_link" id="houseListPage" href="loadHouse.do">지도</a></li>
             <li><a class="menu_link" href="#">관심목록</a></li>
-            <li><a class="menu_link" href="#">방내놓기</a></li>
+            <li><a class="menu_link" href="insertHouse.do">방내놓기</a></li>
             <li><a class="menu_link" href="#">알림</a></li>
             <li><a class="menu_link" href="login.do">로그인/회원가입</a></li>
          </ul>

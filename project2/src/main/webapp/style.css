@@ -37,7 +37,7 @@
 
 	#forMain_header h1 {
 		color: white;
-		font-family: 'Jalnan';
+		font-family: 'Jalnan', '여기어때 잘난체 OTF';
 		margin-left: 50px;
 	}
 
@@ -313,14 +313,21 @@
 	/* footer */
 	footer {
 		width: 100%;
-		height: 90px;
+		height: 100px;
 		position: absolute;
 		bottom: 0;
 		background: gray;
 		color: lightgray;
+		font-size: 12px;
+		padding-top:5px;
 	}
 	
 	#footer_p {
-		margin-top: 5px;
-		text-align: center;
+		margin-top: 10px;
+		margin-left: 20px;
+	}
+	
+	#footer_h4 {
+		font-family: 'Jalnan', '여기어때 잘난체 OTF';
+		font-weight: 600;
 	}

@@ -11,15 +11,32 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=12e06872dba1199aee65af50b2693e45&libraries=services"></script>
 <!-- 카카오맵 -->
 <!-- css 파일 -->
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="houseList_style.css">
+<link rel="stylesheet" href="style.css?ver=10">
+<link rel="stylesheet" href="houseList_style.css?ver=1">
 <!-- css 파일 -->
 <script src="https://kit.fontawesome.com/def66b134a.js" crossorigin="anonymous"></script>
 <!-- 화살표, 검색 버튼 아이콘 제공 태그 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 <script type="text/javascript">
 	$(function(){
+		// 가격 div 클릭했을 때, rangeSlider 보이게 안보이게
+		$("#price").click(function(){
+			$("#rangeSlider").toggle(function(){
+				$("#rangeSlider").css("visibility","visible");
+			});
+		});
+		
+		// rangeSlider
+		var slider = document.getElementById("myRange");
+        var output = document.getElementById("value");
+        output.innerHTML = slider.value;
+        var sliderValue;
+        slider.oninput = function() {
+            output.innerHTML = this.value;
+            sliderValue = this.value;
+        }
+		
+		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
 	        center: new kakao.maps.LatLng(37.5553, 126.9215), // 지도의 중심좌표 - 홍대입구역
@@ -64,7 +81,7 @@
 				markers = [];
 				
 				$.each(arr,function(){
-					//console.log(this);
+					console.log(this);
 					
 					// 마커 하나를 지도위에 표시합니다 
 					addMarker(new kakao.maps.LatLng(this.lat, this.lng));
@@ -80,13 +97,23 @@
 		$("#map_searchBtn").click(function(e){
 			var searchWord = $("#house_search").val(); 
 			console.log(searchWord);
-					
+			var houseType_select = $("#houseType_select option:checked").text();
+			var dealType_select = $("#dealType_select option:checked").text();
+			console.log(houseType_select);
+			console.log(dealType_select);
+			$("#rangeSlider").css("visibility","hidden");
+			$("#price").html(sliderValue+"만원 이하");
+			var price = sliderValue;
+			
 			$.ajax({
 				url:"SearchHouse",
-				data:{searchWord:searchWord},
+				data:{searchWord:searchWord,
+					houseType:houseType_select,
+					dealType:dealType_select,
+					price:price
+					},
 				success:function(arr){
 					$(".list").css("display","none");
-					
 					
 					// markers 비워주기
 					for(i=0; i<markers.length; i++){
@@ -95,6 +122,7 @@
 					markers = [];
 					
 					$.each(arr,function(){
+						console.log(this);
 						var div1 = $("<div></div>").addClass("list");
 						var div2 = $("<div></div>").addClass("innerList");
 						var img = $("<img>").addClass("house_img").attr("src","images/"+this.img_fname);
@@ -105,8 +133,7 @@
 						var p3 = $("<p></p>").html(this.area+"평 "+this.floor+"층").addClass("house_info_area");
 						$(div3).append(h3,p1,p2,p3);
 						$(div2).append(img,div3);
-						$(div1).append(div2).attr("data-house_no", this.house_no);
-						//console.log(this.house_no);
+						$(div1).append(div2);
 						$(".listWrap").append(div1);
 						
 						// 마커 하나를 지도위에 표시합니다 
@@ -128,10 +155,21 @@
 			console.log($(window).scrollTop()); 
 		});
 		
-		$(document).on("click", ".list", function(){
-			var house_no = $(this).attr("data-house_no");
-			console.log(house_no);
-			location.href = "detailHouse.do?house_no="+house_no;
+		var loginId = sessionStorage.getItem("id");
+		if(loginId != null){
+			$("#loginId").html(loginId+"님 / 로그아웃");
+		}else{
+			$("#loginId").html("로그인/회원가입");
+		
+		}
+		$("#loginId").click(function(){
+			if($(this).html()== "로그인/회원가입" ){
+				document.location.href="login.do";
+			}else{
+				document.location.href="loginOut.jsp";
+			}
+			//document.location.href="loginOut.jsp";
+			
 		});
 		
 	});
@@ -144,9 +182,9 @@
 			<ul>
 				<li><a class="menu_link" id="houseListPage" href="loadHouse.do">지도</a></li>
 				<li><a class="menu_link" href="#">관심목록</a></li>
-				<li><a class="menu_link" href="#">방내놓기</a></li>
+				<li><a class="menu_link" href="insertHouse.do">방내놓기</a></li>
 				<li><a class="menu_link" href="#">알림</a></li>
-				<li><a class="menu_link" href="#">로그인/회원가입</a></li>
+				<li><a class="menu_link" href="#" id="loginId"></a></li>
 			</ul>
 		</nav>
 	</header>
@@ -160,13 +198,40 @@
 					</form>
 					<button type="submit" id="map_searchBtn" class="btn red rounded">검색</button>
 				</div>
+				<div class="filter_wrap">
+					<div class="select">
+				      <select id="houseType_select">
+				        <option value="원룸">원룸</option>
+				        <option value="투룸">투룸</option>
+				        <option value="오피스텔">오피스텔</option>
+				      </select>
+				      <div class="select__arrow">▼</div>
+				    </div>
+					<div class="select">
+				      <select id="dealType_select">
+				        <option value="월세">월세</option>
+				        <option value="전세">전세</option>
+				      </select>
+				      <div class="select__arrow">▼</div>
+				    </div>
+				    <div class="select">
+				    	<div id="price">가격</div>
+				    	<div class="select__arrow">▼</div>
+				    </div>
+				    <div id="rangeSlider">
+				    	<div class="slidecontainer">
+					        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+					        <p id="slider_value"><span id="value"></span>만원 이하</p>
+					    </div>
+				    </div>
+				</div>
 			</div>
 			
 			<div class="subContentWrap">
 				<div id="listDiv" class="mostly-customized-scrollbar">
 					<div class="listWrap">
 						<c:forEach var="h" items="${list }">
-							<div class="list" data-house_no ="${h.house_no }">
+							<div class="list">
 								<div class="innerList">
 									<img src="images/${h.img_fname }" class="house_img">
 									<div class="house_info">
