@@ -13,7 +13,7 @@
   º IDE: eclipse<br>
   º DB: Oracle<br>
   º API: kakao map API, Jquery<br>
-  ● 주요 기능
+  ● 주요 기능<br>
   º 서울 지역 집 매물 조회, 검색<br>
   º 매물 등록, 삭제<br>
   º 댓글, 알람 기능<br>
